@@ -4,3 +4,8 @@
 
 layout: home
 ---
+{% assign sorted-events = site.events | sort: 'year' | reverse %}
+{% for event in sorted-events limit: 1 %}
+  {{event.content | markdownify}}
+{% endfor %}
+
