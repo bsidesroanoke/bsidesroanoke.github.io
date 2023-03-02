@@ -1,7 +1,7 @@
 ---
-layout: post
-title:  "Announcing BSides Roanoke 2023 CFP!"
-date:   2022-11-27 15:07:27 -0500
+layout:     post
+title:      "Announcing BSides Roanoke 2023 CFP!"
+date:       2022-11-27 15:07:27 -0500
 categories: bsidesroa2023
 ---
 
