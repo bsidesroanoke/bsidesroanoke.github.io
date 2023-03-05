@@ -7,9 +7,15 @@ A site covering the BSides Roanoke Page.
 
 1. Start a new branch
 2. Make desired changes
-3. Test changes locally using:
+3. Test changes locally using jekyll-serve container in the director this repository is in: (*Using alpine, because latest did no work as of March 1st. Feel free to explore other versions.*)
 
-      bundle exec jekyll serve
+   1. On Linux/Mac:
+
+          docker run -it --rm -p 4000:4000 -v $(pwd):/site bretfisher/jekyll-serve:alpine
+
+   2. On Windows command line:
+
+          docker run -it --rm -p 4000:4000 -v %cd%:/site bretfisher/jekyll-serve:alpine
 
 4. Commit and push branch
 5. Create a PR to merge changes into main.
