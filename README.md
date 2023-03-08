@@ -25,3 +25,5 @@ A site covering the BSides Roanoke Page.
 ### Adding a new post
 
 Follow main steps above.  The desired change will start with copying a file from
+
+Remember that Aaron is the boss of all changes, check with him first
