@@ -1,6 +1,6 @@
 ---
 layout: page
 title: Virginia Cyber Range
-logo: "/images/va_cyber_range.png"
+logo: "/images/vcr.jpg"
 website: https://www.virginiacyberrange.org/
 ---
