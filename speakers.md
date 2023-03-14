@@ -1,34 +1,16 @@
 ---
 layout: page
-title: Speakers
+title: Speaker List
 permalink: /speakers/
 ---
 
-The [Roanoke Information Security Exchange](https://roanokeinfosec.com/) and
-[Noke Codes](http://nokecodes.org/) in partnership with 
-[Virginia Western Community College](https://www.virginiawestern.edu/) are happy
-to announce the Security BSides event in the Roanoke region!
+We are happy to annouce some of the speakers that will be at BSides Roanoke.  More will be added as we continue to review CFP's.
 
-So what is BSides? BSides is a community-driven event for and by information
-security community members. The goal is to expand the spectrum of conversation
-beyond the traditional confines of space and time. It creates opportunities for
-individuals to both present and participate in an intimate atmosphere that
-encourages collaboration. It is an intense event with discussions, demos, and
-interaction from participants. It is where conversations about the
-next-big-thing are happening.  Thousands of people have attended and written
-about their experience at BSides events. Read more at:
-<http://www.securitybsides.org/Media>
+## Rob Perry
 
+![Rob Perry Pic](images/robperry.jpeg)
 
-[comment]: <> (This is the base Jekyll theme. You can find out more info about customizing your Jekyll theme, as well as basic Jekyll usage documentation at [jekyllrb.com](https://jekyllrb.com/))
-[comment]: <> ()
-[comment]: <> (You can find the source code for Minima at GitHub:)
-[comment]: <> ([jekyll][jekyll-organization] /)
-[comment]: <> ([minima](https://github.com/jekyll/minima))
-[comment]: <> ()
-[comment]: <> (You can find the source code for Jekyll at GitHub:)
-[comment]: <> ([jekyll][jekyll-organization] /)
-[comment]: <> ([jekyll](https://github.com/jekyll/jekyll))
-[comment]: <> ()
-[comment]: <> ()
-[comment]: <> ([jekyll-organization]: https://github.com/jekyll)
+Robert Perry is the Chief Information Security Officer (CISO) for Carilion Clinic, one of the largest hospitals and healthcare providers based in southwest Virginia, serving nearly one million in the Virginia community and surrounding areas.
+
+As an expert in the technology industry, Mr. Perry’s charismatic speaking style and passion for technology and cybersecurity have made him a sought after speaker at conferences. Speaking topic range in areas including: cybersecurity systems, and tools, attack and counter attack cybersecurity response systems, authentication and access control.
+
