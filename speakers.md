@@ -24,7 +24,7 @@ Tweeks (or Thomas Weeks) is the Director of Future Technology at Virginia Tech, 
 
 <img src="../images/kennedy.jpg" width="200" height="275">
 
-With a background in computer science, I transitioned to Application Security seamlessly after college. My goal is to make security easily accessible to everyone, through improving security culture and the developer experience. I believe that security should be a team that helps guide people forward instead of being a frustrating blocker. I am passionate about getting minorities, especially women, excited about security. 
+With a background in computer science, Kennedy Toomey transitioned to Application Security seamlessly after college. Her goal is to make security easily accessible to everyone, through improving security culture and the developer experience. I believe that security should be a team that helps guide people forward instead of being a frustrating blocker. I am passionate about getting minorities, especially women, excited about security. 
 
 ## Logan Diomedi
 
