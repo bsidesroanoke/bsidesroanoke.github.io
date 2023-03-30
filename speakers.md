@@ -8,7 +8,7 @@ BSides Roanoke 2023 is thrilled to announce an impressive lineup of speakers, in
 
 ## Larry Whiteside Jr.
 
-<img src="../images/larry.jpg" width="200" height="275">
+<img src="../images/larry.png" width="200" height="275">
 
 Chief Information Security Officer (CISO), RegScale, Tysons, Va.
 
