@@ -44,9 +44,9 @@ minima:
   skin: dark
 
 # Build settings
-theme: minima
+remote_theme: jekyll/minima@2863624
 plugins:
-  - jekyll-feed
+  - jekyll-remote-theme
 
 show_excerpts: true
 
