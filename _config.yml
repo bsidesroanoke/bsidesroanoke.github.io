@@ -39,6 +39,7 @@ header_pages:
   - sponsors.md
   - about/code_of_conduct.md
   - speakers.md
+  - venue.md
 
 minima:
   skin: dark
