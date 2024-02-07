@@ -41,13 +41,18 @@ header_pages:
   - speakers.md
   - venue.md
 
+theme: minima
 minima:
-  skin: dark
+  skin: classic
+  # Disabling.  Sponsors like their logo to be seen, and we don't have a 
+  # good mechanism to ensure their logos work on both light and dark
+  # backgrounds.
 
 # Build settings
-remote_theme: jekyll/minima@2863624
+#remote_theme: jekyll/minima@2863624
 plugins:
-  - jekyll-remote-theme
+  - jekyll-feed
+#  - jekyll-remote-theme
 
 show_excerpts: true
 
