@@ -23,7 +23,7 @@ email: info@roanokeinfosec.com
 description: >- # this means to ignore newlines until "baseurl:"
   Roanoke BSides is a community supported information security event based
   out of Roanoke, Virginia. It's primarily supported from the Roanoke InfoSec
-  Exchange (RISE), Noke Codes, and Virginia Western Community College.
+  Exchange (RISE), MAKE Roanoke, and Virginia Western Community College.
 baseurl: "" 
 url: "https://bsidesroanoke.github.io" 
 twitter_username: roanokeinfosec
