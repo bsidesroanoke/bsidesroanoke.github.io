@@ -1,0 +1,122 @@
+---
+import { getCollection } from 'astro:content';
+
+// Props interface for event data
+export interface Props {
+  event?: {
+    title: string;
+    location: string;
+    date: string;
+    venue_parking?: string;
+    slug?: string;
+  };
+}
+
+const { event } = Astro.props as Props;
+
+// Determine which event to use for talks
+let currentEvent = event;
+
+// If no event prop was passed, fall back to the most recent event
+if (!currentEvent) {
+  // Get all events and sort by date (most recent first)
+  const events = await getCollection('events');
+
+  // DEBUG: Log the events collection order
+  console.log('FeaturedTalks Debug - All events:', events.map(e => ({
+    id: e.id,
+    slug: e.data.slug,
+    date: e.data.date,
+    title: e.data.title
+  })));
+
+  // Sort events by date (most recent first)
+  const sortedEvents = events.sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
+  console.log('FeaturedTalks Debug - Sorted events:', sortedEvents.map(e => ({
+    id: e.id,
+    slug: e.data.slug,
+    date: e.data.date,
+    title: e.data.title
+  })));
+
+  const mostRecentEvent = sortedEvents.length > 0 ? sortedEvents[0] : null;
+  console.log('FeaturedTalks Debug - Most recent event:', mostRecentEvent ? {
+    id: mostRecentEvent.id,
+    slug: mostRecentEvent.data.slug,
+    date: mostRecentEvent.data.date,
+    title: mostRecentEvent.data.title
+  } : 'No events found');
+
+  currentEvent = mostRecentEvent?.data || undefined;
+}
+
+// Get talks for the current event
+let featuredTalks: any[] = [];
+if (currentEvent && currentEvent.slug) {
+  const talks = await getCollection('talks');
+  console.log('FeaturedTalks Debug - All talks:', talks.map(t => ({
+    id: t.id,
+    eventSlug: t.data.eventSlug,
+    featured: t.data.featured,
+    title: t.data.title
+  })));
+  console.log('FeaturedTalks Debug - Talks collection length:', talks.length);
+  console.log('FeaturedTalks Debug - Current event slug:', currentEvent.slug);
+
+  featuredTalks = talks.filter(talk => talk.data.featured && talk.data.eventSlug === currentEvent.slug);
+  console.log('FeaturedTalks Debug - Filtered talks:', featuredTalks.map(t => ({
+    id: t.id,
+    eventSlug: t.data.eventSlug,
+    featured: t.data.featured,
+    title: t.data.title
+  })));
+  console.log('FeaturedTalks Debug - Featured talks length:', featuredTalks.length);
+}
+
+// Format slugs for dynamic routing
+function formatDate(dateString: string) {
+  const options: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'long', day: 'numeric' };
+  return new Date(dateString).toLocaleDateString('en-US', options);
+}
+
+function getTimeSlot(talk: any) {
+  // Try new structured fields first, fall back to legacy fields
+  const start = talk.data.startTime || talk.data.timeSlotStart;
+  const end = talk.data.endTime || talk.data.timeSlotEnd;
+  if (start && end) {
+    const startTime = new Date(start).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    const endTime = new Date(end).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    return `${startTime} - ${endTime}`;
+  }
+  // Fallback to legacy timeSlot field
+  return talk.data.timeSlot || 'TBA';
+}
+---
+
+{featuredTalks.length > 0 && (
+  <div class="container mx-auto px-4 py-4 md:py-6">
+    <h2 class="text-3xl md:text-5xl font-bold text-center mb-8">Featured Talks from {currentEvent ? formatDate(currentEvent.date) : 'Upcoming Event'}</h2>
+    <div class="bg-gray-800 rounded-3xl p-8 border border-gray-700">
+      {featuredTalks.map((talk: any) => (
+        <div class="mb-8 pb-8 border-b border-gray-700 last:border-b-0">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between mb-2">
+            <div class="flex items-center space-x-4">
+              <span class="text-sm font-semibold text-gray-400">{getTimeSlot(talk)}</span>
+              <span class="text-sm font-semibold text-accent-green">{talk.data.room || talk.data.location}</span>
+            </div>
+            <h3 class="text-2xl font-bold text-white mt-2 sm:mt-0">{talk.data.title}</h3>
+          </div>
+          <p class="text-gray-300 mt-4">
+            <span class="font-bold">Abstract:</span> {talk.data.abstract}
+          </p>
+        </div>
+      ))}
+    </div>
+  </div>
+)}
+
+<style>
+.container {
+  max-width: 1200px;
+}
+</style>

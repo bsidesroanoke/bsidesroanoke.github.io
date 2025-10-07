@@ -1,0 +1,29 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import Markdoc from '@markdoc/markdoc';
+
+export async function getStaticPaths() {
+  const events = await getCollection('events');
+  // Only create pages for events that have venue_parking info
+  const eventsWithVenueInfo = events.filter(event => event.data.venue_parking);
+  return eventsWithVenueInfo.map(event => ({
+    params: { year: event.data.slug },
+    props: { event },
+  }));
+}
+
+const { event } = Astro.props;
+const { data } = event;
+const renderedVenueInfo = Markdoc.renderers.html(Markdoc.transform(Markdoc.parse(data.venue_parking || '')));
+---
+<Layout title={`Venue & Parking - ${data.title}`} eventSlug={data.slug}>
+  <section class="container mx-auto px-4 py-16 md:py-24">
+    <div class="max-w-3xl mx-auto">
+      <h1 class="text-4xl md:text-5xl font-extrabold text-white mb-8 text-center">Venue & Parking for {data.title}</h1>
+      <div class="bg-gray-800 rounded-2xl p-8 border border-gray-700">
+        <div class="prose prose-invert max-w-none prose-h2:mt-0" set:html={renderedVenueInfo} />
+      </div>
+    </div>
+  </section>
+</Layout>

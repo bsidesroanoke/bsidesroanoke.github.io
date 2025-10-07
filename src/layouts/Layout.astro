@@ -1,0 +1,41 @@
+---
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { getCollection } from 'astro:content';
+import '../styles/global.css';
+
+export interface Props {
+	title: string;
+	eventSlug?: string; // Accept an optional event slug
+}
+
+const { title, eventSlug: pageEventSlug } = Astro.props;
+
+let eventSlugForHeader = pageEventSlug;
+
+// If the page doesn't provide an event slug, find the latest one to use as a default.
+if (!eventSlugForHeader) {
+	const events = await getCollection('events');
+	const latestEvent = [...events].sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime())[0];
+	eventSlugForHeader = latestEvent.data.slug;
+}
+
+// Check if the event for the header has talks
+const allTalks = await getCollection('talks');
+const hasTalksForEvent = allTalks.some(talk => talk.data.eventSlug === eventSlugForHeader);
+---
+
+<!doctype html>
+<html lang="en" class="dark">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<title>BSides Roanoke - {title}</title>
+	</head>
+	<body class="bg-gray-900 text-gray-100 font-sans">
+		<Header title={title} eventSlug={eventSlugForHeader} hasTalks={hasTalksForEvent} />
+		<slot />
+		<Footer />
+	</body>
+</html>

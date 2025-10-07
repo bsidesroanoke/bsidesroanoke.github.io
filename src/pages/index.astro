@@ -1,0 +1,80 @@
+---
+import { Image } from 'astro:assets';
+import BlogList from '../components/BlogList.astro';
+import EventsUi from '../components/EventsUi.astro';
+import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+import Markdoc from '@markdoc/markdoc';
+import logo from '../assets/b-sides-roanoke.svg';
+
+// Get the latest event from content collections
+const events = await getCollection('events');
+const cfps = await getCollection('cfp');
+// Create a sorted copy to avoid modifying the original array, then get the latest.
+const latestEvent = [...events].sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime())[0];
+const renderedContent = Markdoc.renderers.html(Markdoc.transform(Markdoc.parse(latestEvent.body || '')));
+
+// Determine which action buttons to show for the hero section
+let registrationButton = null;
+if (latestEvent.data.register) {
+  registrationButton = { text: 'Register Now', href: latestEvent.data.register };
+}
+let cfpButton = null;
+const latestCfp = cfps.find(cfp => cfp.data.year === latestEvent.data.slug);
+if (latestCfp) {
+  cfpButton = { text: 'Call for Papers', href: `/cfp/${latestEvent.data.slug}` };
+}
+
+export const prerender = true;
+---
+<Layout title="Home" eventSlug={latestEvent.data.slug}>
+
+  <!-- Event Hero Section -->
+  <header id="event-hero" class="w-full py-20 md:py-32 flex items-center justify-center text-center relative overflow-hidden bg-gray-800">
+    <Image
+      src={latestEvent.data.heroImage || logo}
+      alt={`Cover image for ${latestEvent.data.title}`}
+      class="absolute inset-0 w-full h-full object-cover opacity-30"
+    />
+    <div class="relative z-10 p-6 md:p-12 bg-gray-900 bg-opacity-70 rounded-3xl">
+      <h1 class="text-4xl md:text-6xl font-extrabold text-white mb-4">{latestEvent.data.title}</h1>
+      <p class="text-xl md:text-2xl text-gray-300 mb-8">{latestEvent.data.description}</p>
+      <div class="space-y-4 md:space-y-0 md:space-x-4">
+        <span class="bg-accent-green text-gray-900 px-6 py-2 rounded-full font-semibold">
+          {new Date(latestEvent.data.date).toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' })}
+        </span>
+        <a href={`/venue/${latestEvent.data.slug}`} class="bg-gray-700 text-gray-100 px-6 py-2 rounded-full font-semibold hover:bg-gray-600 transition-colors">
+          {latestEvent.data.location}
+        </a>
+      </div>
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        {registrationButton && (
+          <a href={registrationButton.href} class="inline-block px-8 py-4 bg-accent-blue text-gray-900 rounded-full font-bold text-lg hover:bg-opacity-80 transition-colors glow-shadow">
+            {registrationButton.text}
+          </a>
+        )}
+        {cfpButton && (
+          <a href={cfpButton.href} class="inline-block px-8 py-4 bg-gray-700 text-white border border-accent-blue rounded-full font-bold text-lg hover:bg-accent-blue hover:text-gray-900 transition-colors">
+            {cfpButton.text}
+          </a>
+        )}
+      </div>
+    </div>
+  </header>
+
+  <!--- Events Layout -->
+  <EventsUi event={latestEvent.data}>
+    <Fragment set:html={renderedContent} />
+  </EventsUi>
+
+
+  <!-- Blog Section -->
+  <section id="blog" class="w-full bg-gray-800 py-4 md:py-6">
+    <div class="container mx-auto px-4">
+      <h2 class="text-3xl md:text-5xl font-bold text-center mb-8">Latest from the Blog</h2>
+      <!-- Import and use BlogList component -->
+      <BlogList showCount={3} />
+    </div>
+  </section>
+
+</Layout>

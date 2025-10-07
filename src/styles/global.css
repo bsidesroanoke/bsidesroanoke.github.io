@@ -1,0 +1,57 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom colors */
+:root {
+  --bg-dark: #121212;
+  --surface-dark: #1e1e1e;
+  --text-light: #e0e0e0;
+  --accent-blue: #00bcd4;
+  --accent-green: #00c853;
+}
+
+/* Set a dark background and light text for the entire page */
+body {
+  background-color: var(--bg-dark);
+  color: var(--text-light);
+  font-family: 'Inter', sans-serif;
+}
+
+/* Custom glow effect on buttons and elements */
+.glow-shadow {
+  box-shadow: 0 0 15px var(--accent-blue);
+  transition: box-shadow 0.3s ease-in-out;
+}
+
+.glow-shadow:hover {
+  box-shadow: 0 0 25px var(--accent-blue);
+}
+
+/* Glitch effect for the hero section background */
+@keyframes glitch {
+  0% { text-shadow: -8px -8px 0 var(--accent-blue), 8px 8px 0 var(--accent-green), 12px 12px 0 #ff4444; }
+  12.5% { text-shadow: 10px 10px 0 var(--accent-blue), -10px -10px 0 var(--accent-green), -15px 15px 0 #ffaa00; }
+  25% { text-shadow: -12px 12px 0 var(--accent-blue), 15px -15px 0 var(--accent-green), 18px 8px 0 #ff6b6b; }
+  37.5% { text-shadow: 15px -15px 0 var(--accent-blue), -18px 18px 0 var(--accent-green), -12px -8px 0 #ff8800; }
+  50% { text-shadow: none; }
+  100% { text-shadow: none; }
+}
+
+.glitch-text {
+  animation: glitch 8s infinite;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--surface-dark);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--accent-blue);
+  border-radius: 5px;
+}

@@ -1,0 +1,50 @@
+---
+import { getCollection } from 'astro:content';
+import BlogPost from './BlogPost.astro';
+
+// Get all blog posts
+const blogPosts = await getCollection('blogs');
+const sortedPosts = blogPosts.sort((a, b) => new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime());
+
+// Define props
+interface Props {
+  showCount?: number;
+}
+
+const { showCount } = Astro.props as Props;
+
+// Format the slug for dynamic routing
+function formatSlug(id: string) {
+  // Extract the filename from the full path
+  const filename = id.split('/').pop();
+  return filename?.replace('.md', '') || '';
+}
+---
+
+<div>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+    {sortedPosts.slice(0, showCount || 3).map(post => (
+      <BlogPost
+        title={post.data.title}
+        description={post.data.description}
+        pubDate={post.data.pubDate}
+        heroImage={post.data.heroImage}
+        readMoreLink={`/blog/${formatSlug(post.id)}`}
+      />
+    ))}
+  </div>
+
+  {showCount && sortedPosts.length > showCount && (
+    <div class="text-center mt-8">
+      <a href="/blog" class="px-6 py-3 bg-accent-blue text-gray-900 rounded-full font-bold hover:bg-opacity-80 transition-colors glow-shadow">
+        See More
+      </a>
+    </div>
+  )}
+</div>
+
+<style>
+.grid {
+  display: grid;
+}
+</style>
