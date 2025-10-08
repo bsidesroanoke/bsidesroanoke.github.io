@@ -1,0 +1,60 @@
+---
+import { Image } from 'astro:assets';
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+import Markdoc from '@markdoc/markdoc';
+
+export async function getStaticPaths() {
+  const talks = await getCollection('talks');
+  const years = [...new Set(talks.map(talk => talk.data.eventSlug).filter(Boolean))];
+  return years.map(year => ({
+    params: { year },
+  }));
+}
+
+const { year } = Astro.params;
+
+// Get all talks for the current year
+const talks = (await getCollection('talks')).filter(talk => talk.data.eventSlug === year);
+
+// Get all speaker slugs from the talks for the current year
+const speakerSlugs = new Set(talks.flatMap(talk => talk.data.speakers || []));
+
+// Get all speakers and filter by the slugs from the current year's talks
+const allSpeakers = await getCollection('speakers');
+const eventSpeakers = allSpeakers.filter(speaker => speakerSlugs.has(speaker.id.replace(/\.md$/, '')));
+const sortedSpeakers = eventSpeakers.sort((a, b) => a.data.name.localeCompare(b.data.name));
+---
+
+<Layout title={`BSides Roanoke ${year} Speakers`} eventSlug={year}>
+  <div class="container mx-auto px-4 py-16 md:py-24">
+    <h1 class="text-5xl font-extrabold mb-8 text-center">{`BSides Roanoke ${year} Speakers`}</h1>
+
+    <div class="max-w-4xl mx-auto">
+      {sortedSpeakers.map((speaker: any) => {
+        const ast = Markdoc.parse(speaker.data.bio || '');
+        const content = Markdoc.transform(ast);
+        const html = Markdoc.renderers.html(content);
+        return (
+          <div class="border-b border-gray-700 py-8">
+            <div class="flex flex-col md:flex-row gap-8 items-start">
+              <div class="md:w-1/4 text-center md:text-left flex-shrink-0">
+                {speaker.data.photo && (
+                  <Image src={speaker.data.photo} alt={speaker.data.name} width={150} height={150} class="rounded-full mx-auto md:mx-0" />
+                )}
+                <h2 class="text-2xl font-bold mt-4">
+                  <a href={`/speakers/${speaker.id.replace(/\.md$/, '')}`} class="hover:text-accent-blue transition-colors">
+                    {speaker.data.name}
+                  </a>
+                </h2>
+              </div>
+              <div class="md:w-3/4">
+                <div class="prose prose-invert max-w-none" set:html={html} />
+              </div>
+            </div>
+          </div>
+        )
+      })}
+    </div>
+  </div>
+</Layout>

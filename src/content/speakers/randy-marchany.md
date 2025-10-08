@@ -1,21 +1,4 @@
 ---
 name: "Randy Marchany"
-title: ""
-twitter: ""
-bio: "[Add bio here]"
-featured: false
-photo: "../../../public/b-sides-roanoke.svg"
-photoAlt: "Randy Marchany, Speaker at BSides Roanoke"
+bio: "Randy is the Chief Information Security Officer of Virginia Tech and the Director of Virginia Tech's IT Security Laboratory and has 25 years experience as a systems administrator, IT auditor, and security specialist. He is a co-author of the original SANS Top 10 Internet Threats, the SANS Top 20 Internet Threats, the SANS Consensus Roadmap for Defeating DDoS Attacks, and the SANS Incident Response: Step-by-Step guides. Randy is currently a senior instructor for the [SANS Institute](https://www.sans.org/) and has taught a wide variety of courses over the years. Currently, he can be found teaching [SEC566: Implementing and Auditing the Critical Security Controls](https://www.sans.org/cyber-security-courses/implementing-auditing-critical-security-controls/) on a regular basis."
 ---
-
-# Randy Marchany
-
-**Title:** [Add title here]
-
-**Twitter:** [Add Twitter handle here]
-
-**Bio:**
-[Add detailed bio here]
-
-**Featured Talks:**
-- [Add talks here]

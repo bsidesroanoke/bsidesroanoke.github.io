@@ -1,54 +1,15 @@
 ---
-import Layout from '../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
 
-// Get all talks and sort by date (most recent first)
-const talks = await getCollection('talks');
-const sortedTalks = talks.sort((a, b) => {
-  const dateA = a.data.date ? new Date(a.data.date).getTime() : 0;
-  const dateB = b.data.date ? new Date(b.data.date).getTime() : 0;
-  return dateB - dateA;
-});
+// Get all events and find the latest one by date.
+const events = await getCollection('events');
+const latestEvent = events.sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime())[0];
 
-// Format the slug for dynamic routing
-function formatSlug(id: string): string {
-  return id.replace('talks/', '').replace('.md', '');
+// If a latest event is found, redirect to its talks page.
+if (latestEvent) {
+  return Astro.redirect(`/talks/${latestEvent.slug}`);
 }
+
+// If no events are found, return a 404 response.
+return new Response('No events found', { status: 404 });
 ---
-
-<Layout title="Talks">
-  <div class="container mx-auto px-4 py-16 md:py-24">
-    <h1 class="text-5xl font-extrabold mb-8 text-center">BSides Roanoke Talks</h1>
-
-    <div class="w-full max-w-4xl">
-    {sortedTalks.map(talk => (
-      <div class="mb-8 pb-8 border-b border-gray-700 last:border-b-0">
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between mb-2">
-          <div class="flex items-center space-x-4">
-            <span class="text-sm font-semibold text-gray-400">{talk.data.date ? new Date(talk.data.date).toLocaleTimeString([], {hour: 'numeric', minute: '2-digit'}) : 'TBD'}</span>
-            <span class="text-sm font-semibold text-accent-green">{talk.data.location}</span>
-          </div>
-          <h2 class="text-3xl font-bold text-white mt-2 sm:mt-0">{talk.data.title}</h2>
-        </div>
-        <p class="text-gray-300 mt-4"><strong>Abstract:</strong> {talk.data.abstract}</p>
-
-        {/* Speakers section */}
-        {talk.data.speakers && talk.data.speakers.length > 0 && (
-          <div class="mt-4">
-            <h3 class="text-xl font-bold mb-2">Speakers</h3>
-            <ul class="list-disc list-inside text-gray-300">
-              {talk.data.speakers.map((speaker) => (
-                <li>{speaker}</li>
-              ))}
-            </ul>
-          </div>
-        )}
-
-        <a href={`/talks/${formatSlug(talk.id)}`} class="mt-4 inline-block px-6 py-3 bg-accent-blue text-gray-900 rounded-full font-bold hover:bg-opacity-80 transition-colors glow-shadow">
-          View Talk
-        </a>
-      </div>
-    ))}
-    </div>
-  </div>
-</Layout>

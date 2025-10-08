@@ -1,0 +1,75 @@
+--- 
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const talks = await getCollection('talks');
+  const years = [...new Set(talks.map(talk => talk.data.eventSlug).filter(Boolean))];
+  return years.map(year => ({
+    params: { year },
+  }));
+}
+
+const { year } = Astro.params;
+
+// Get all speakers and create a map for speaker names
+const speakers = await getCollection('speakers');
+const speakerMap = new Map(speakers.map(s => [s.id.replace(/\.md$/, ''), s.data.name]));
+
+// Get all talks for the current year and sort by date
+const talks = (await getCollection('talks')).filter(talk => talk.data.eventSlug === year);
+const sortedTalks = talks.sort((a, b) => {
+  const dateA = a.data.date ? new Date(a.data.date) : null;
+  const dateB = b.data.date ? new Date(b.data.date) : null;
+
+  if (dateA && dateB) {
+    return dateB.getTime() - dateA.getTime();
+  }
+  if (dateA) {
+    return -1;
+  }
+  if (dateB) {
+    return 1;
+  }
+  return 0;
+});
+
+---
+<Layout title={`BSides Roanoke ${year} Talks`} eventSlug={year}>
+  <div class="container mx-auto px-4 py-16 md:py-24">
+    <h1 class="text-5xl font-extrabold mb-8 text-center">{`BSides Roanoke ${year} Talks`}</h1>
+
+    <div class="w-full max-w-4xl mx-auto">
+    {sortedTalks.map((talk) => {
+      const { data, id, rendered } = talk;
+      return (
+        <div class="mb-8 pb-8 border-b border-gray-700 last:border-b-0">
+          <h2 id={id.replace(/\.md$/, '')} class="text-3xl font-bold text-white mb-2 scroll-mt-24">{data.title}</h2>
+          <div class="flex items-center space-x-4 text-sm font-semibold mb-4">
+            <span class="text-gray-400">
+              {data.startTime && data.endTime
+                ? `${new Date(data.startTime).toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' })} - ${new Date(data.endTime).toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' })}`
+                : 'TBD'}
+            </span>
+            <span class="text-accent-green">{data.room}</span>
+            {data.speakers && data.speakers.length > 0 && (
+              <div class="text-gray-400">
+                {data.speakers.map((speakerSlug, index) => (
+                  <>
+                    <a href={`/speakers/${speakerSlug}`} class="text-accent-blue hover:underline">
+                      {speakerMap.get(speakerSlug) || speakerSlug}
+                    </a>
+                    {index < data.speakers.length - 1 && ', '}
+                  </>
+                ))}
+              </div>
+            )}
+          </div>
+
+          {data.abstract && <p class="prose prose-invert max-w-none mx-auto mt-4">{data.abstract}</p>}
+        </div>
+      );
+    })}
+    </div>
+  </div>
+</Layout>

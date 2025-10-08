@@ -11,6 +11,16 @@ export interface Props {
 
 const { event } = Astro.props as Props;
 
+// Get all speakers and create a map of slug to name
+const allSpeakers = await getCollection('speakers');
+const speakerMap = new Map();
+for (const speaker of allSpeakers) {
+  if (speaker && speaker.id) {
+    const slug = speaker.id.replace(/\.md$/, '');
+    speakerMap.set(slug, speaker.data.name);
+  }
+}
+
 // Get all talks and sort by startTime
 const allTalks = await getCollection('talks');
 console.log('Schedule Debug - All talks:', allTalks.map(t => ({
@@ -53,14 +63,19 @@ function formatTimeSlot(start: string | undefined, end: string | undefined) {
 }
 ---
 
-<div class="container mx-auto px-4 py-4 md:py-6">
+<div class="container mx-auto px-4">
   <h2 class="text-3xl md:text-5xl font-bold text-center mb-8">Event Schedule</h2>
   {talks.length > 0 ? (
     <ImprovedSchedule client:load talks={talks.map(talk => ({
       id: talk.id,
       slug: talk.id.replace(/\.md$/, ''), // Create slug from filename
       title: talk.data.title,
-      speaker: Array.isArray(talk.data.speakers) ? talk.data.speakers.join(', ') : 'TBA',
+      speaker: Array.isArray(talk.data.speakers)
+        ? talk.data.speakers.map(slug => ({
+            name: speakerMap.get(slug) || slug,
+            slug: slug,
+          }))
+        : [],
       startTime: talk.data.startTime,
       endTime: talk.data.endTime,
       time: formatTimeSlot(talk.data.startTime, talk.data.endTime),

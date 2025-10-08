@@ -1,11 +1,4 @@
 ---
 name: "Hristo Asenov"
-title: ""
-twitter: ""
-bio: "[Add bio here]"
-featured: false
-photo: "../../../public/b-sides-roanoke.svg"
-photoAlt: "Hristo Asenov, Speaker at BSides Roanoke"
+bio: "Hristo Asenov has about ten years of professional experience, working in both military, academic and private sectors. He completed graduate studies at University of Delaware."
 ---
-
-# Here's some test md

@@ -1,21 +1,4 @@
 ---
 name: "James \"Jimmy\" Ririe"
-title: ""
-twitter: ""
-bio: "[Add bio here]"
-featured: false
-photo: "../../../public/b-sides-roanoke.svg"
-photoAlt: "James \"Jimmy\" Ririe, Speaker at BSides Roanoke"
+bio: "James \"Jimmy\" Ririe is a recent graduate from Radford University with degrees in cybersecurity and computer science. He was president of Radford's cybersecurity club and leader of its CTF team."
 ---
-
-# James "Jimmy" Ririe
-
-**Title:** [Add title here]
-
-**Twitter:** [Add Twitter handle here]
-
-**Bio:**
-[Add detailed bio here]
-
-**Featured Talks:**
-- [Add talks here]

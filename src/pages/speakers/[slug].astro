@@ -34,6 +34,10 @@ export async function getStaticPaths() {
 const { speaker, talks } = Astro.props;
 const { data, body } = speaker;
 
+const ast = Markdoc.parse(data.bio || '');
+const content = Markdoc.transform(ast);
+const html = Markdoc.renderers.html(content);
+
 // Group talks by their eventSlug
 const groupedTalks = talks.reduce((acc, talk) => {
   const group = talk.eventSlug;
@@ -86,7 +90,7 @@ const cleanTitle = (title: string) => title.replace(/\[([^\]]+)\]\([^)]+\)/g, '$
       {data.bio && (
         <div class="bg-gray-800 rounded-3xl p-8 border border-gray-700 mt-8">
           <h2 class="text-2xl font-bold text-white mb-4">Bio</h2>
-          <p class="prose prose-invert max-w-none text-lg leading-relaxed">{data.bio}</p>
+          <div class="prose prose-invert max-w-none text-lg leading-relaxed" set:html={html} />
         </div>
       )}
 

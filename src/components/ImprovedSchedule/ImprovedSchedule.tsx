@@ -87,7 +87,7 @@ interface Talk {
   id: number | string;
   slug: string;
   title: string;
-  speaker: string;
+  speaker: { name: string; slug: string }[];
   startTime?: string; // Start time in various formats (ISO or local)
   endTime?: string;   // End time in various formats (ISO or local)
   room: string;
@@ -142,7 +142,16 @@ const TalkCard = ({ talk, onSelect }: { talk: Talk, onSelect: (talk: Talk) => vo
       {/* Title and speaker on same line */}
       <div className="flex items-center justify-between mb-2 flex-grow">
         <h3 className="text-white font-semibold text-lg mr-2">{stripMarkdown(talk.title)}</h3>
-        <p className="text-gray-400 text-sm">{talk.speaker}</p>
+        <p className="text-gray-400 text-sm">
+          {talk.speaker.map((s, index) => (
+            <React.Fragment key={s.slug}>
+              <a href={`/speakers/${s.slug}`} className="hover:underline" onClick={(e) => e.stopPropagation()}>
+                {s.name}
+              </a>
+              {index < talk.speaker.length - 1 && ', '}
+            </React.Fragment>
+          ))}
+        </p>
       </div>
 
       {/* Room, track, and times on same line */}
@@ -182,13 +191,22 @@ const TalkModal = ({ talk, onClose, eventSlug }: { talk: Talk | null, onClose: (
       <div className="bg-slate-800 rounded-2xl shadow-2xl max-w-2xl w-full border border-slate-700" onClick={e => e.stopPropagation()}>
         <div className="p-6 border-b border-slate-700 flex justify-between items-start">
           <div>
-            <a href={`/talks/${talk.slug}`} class="hover:underline">
+            <a href={`/talks/${eventSlug}#${talk.slug}`} className="hover:underline">
               <h2 className="text-2xl font-bold text-white">
                 {cleanTitle}
-                <span class="text-blue-400 text-sm ml-2">🔗</span>
+                <span className="text-blue-400 text-sm ml-2">🔗</span>
               </h2>
             </a>
-            <p className="text-gray-400 mt-1">by {talk.speaker}</p>
+            <p className="text-gray-400 mt-1">by {
+              talk.speaker.map((s, index) => (
+                <React.Fragment key={s.slug}>
+                  <a href={`/speakers/${s.slug}`} className="hover:underline">
+                    {s.name}
+                  </a>
+                  {index < talk.speaker.length - 1 && ', '}
+                </React.Fragment>
+              ))
+            }</p>
           </div>
           <button onClick={onClose} className="text-gray-400 hover:text-white transition-colors">&times;</button>
         </div>
@@ -231,7 +249,7 @@ const ImprovedSchedule = ({ talks = [], eventDate, eventSlug }: { talks: Talk[],
     const matchesTrack = selectedTrack === 'All Tracks' || talk.track === selectedTrack;
     const matchesSearch = searchQuery.trim() === '' ||
       (talk.title && talk.title.toLowerCase().includes(searchQuery.toLowerCase())) ||
-      (talk.speaker && talk.speaker.toLowerCase().includes(searchQuery.toLowerCase())) ||
+      (talk.speaker && talk.speaker.some(s => s.name.toLowerCase().includes(searchQuery.toLowerCase()))) ||
       (talk.room && talk.room.toLowerCase().includes(searchQuery.toLowerCase()));
     return matchesRoom && matchesTrack && matchesSearch;
   });
@@ -243,12 +261,17 @@ const ImprovedSchedule = ({ talks = [], eventDate, eventSlug }: { talks: Talk[],
     return aKey.localeCompare(bKey);
   });
 
+  const isMultiDay = eventDate.includes(' - ') || eventDate.toLowerCase().includes(' to ');
+
   return (
-    <div className="min-h-screen bg-gray-900 font-sans text-gray-100 p-4 md:p-8">
+    <div className="min-h-screen bg-gray-900 font-sans text-gray-100">
       {/* Header Section */}
       <header className="mb-8">
-        <h1 className="text-3xl md:text-4xl font-bold text-center text-white">Conference Schedule</h1>
-        <p className="text-center text-gray-400 mt-2">Day 1: {eventDate}</p>
+        {isMultiDay && (
+          <p className="text-center text-gray-400 mt-2">
+            Day 1: {eventDate}
+          </p>
+        )}
       </header>
 
       {/* Filter controls section */}

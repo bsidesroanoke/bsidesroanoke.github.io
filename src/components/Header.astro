@@ -21,7 +21,7 @@ import logo from '../assets/b-sides-roanoke.svg';
       <a href={`/venue/${eventSlug}`} class="text-gray-300 hover:text-accent-blue transition-colors">Venue/Parking</a>
       {hasTalks ? (
         <>
-          <a href={`/events/${eventSlug}#speakers`} class="text-gray-300 hover:text-accent-blue transition-colors">Speakers</a>
+          <a href={`/speakers/${eventSlug}`} class="text-gray-300 hover:text-accent-blue transition-colors">Speakers</a>
           <a href={`/events/${eventSlug}#schedule`} class="text-gray-300 hover:text-accent-blue transition-colors">Schedule</a>
         </>
       ) : <a href={`/cfp/${eventSlug}`} class="text-gray-300 hover:text-accent-blue transition-colors">CFP</a>}
@@ -45,7 +45,7 @@ import logo from '../assets/b-sides-roanoke.svg';
     <a href={`/venue/${eventSlug}`} class="text-2xl text-gray-200 hover:text-accent-blue transition-colors">Venue/Parking</a>
     {hasTalks ? (
       <>
-        <a href={`/events/${eventSlug}#speakers`} class="text-2xl text-gray-200 hover:text-accent-blue transition-colors">Speakers</a>
+        <a href={`/speakers/${eventSlug}`} class="text-2xl text-gray-200 hover:text-accent-blue transition-colors">Speakers</a>
         <a href={`/events/${eventSlug}#schedule`} class="text-2xl text-gray-200 hover:text-accent-blue transition-colors">Schedule</a>
       </>
     ) : <a href={`/cfp/${eventSlug}`} class="text-2xl text-gray-200 hover:text-accent-blue transition-colors">CFP</a>}

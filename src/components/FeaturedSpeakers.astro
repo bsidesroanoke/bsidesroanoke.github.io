@@ -2,39 +2,51 @@
 import { Image } from 'astro:assets';
 import { getCollection } from 'astro:content';
 
-// Get all featured speakers
-const speakers = await getCollection('speakers');
-const featuredSpeakers = speakers.filter(speaker => speaker.data.featured);
+export interface Props {
+  event?: {
+    slug?: string;
+  };
+}
+
+const { event } = Astro.props as Props;
+
+// Get all speakers
+const allSpeakers = await getCollection('speakers');
+
+// Get all talks for the current event to find the speakers for this event
+const allTalks = await getCollection('talks');
+const eventTalks = allTalks.filter(talk => talk.data.eventSlug === event.slug);
+const speakerSlugs = new Set(eventTalks.flatMap(talk => talk.data.speakers || []));
+const eventSpeakers = allSpeakers.filter(speaker => speakerSlugs.has(speaker.id.replace(/\.md$/, '')));
+
+// Filter for featured speakers for this event
+const featuredSpeakers = eventSpeakers.filter(speaker => speaker.data.featured);
 ---
 
-<div class="w-full bg-gray-800 py-4 md:py-6">
-  <div class="container mx-auto px-4">
+{featuredSpeakers.length > 0 && (
+  <div>
     <h2 class="text-3xl md:text-5xl font-bold text-center mb-8">Featured Speakers</h2>
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-      {featuredSpeakers.map(speaker => (
-        <div class="bg-gray-900 rounded-3xl p-6 flex flex-col items-center text-center border border-gray-700 hover:border-accent-blue transition-colors">
-          <div class="w-32 h-32 rounded-full overflow-hidden mb-4 border-2 border-gray-600">
-            {speaker.data.photo ? (
-              <Image src={speaker.data.photo} alt={speaker.data.photoAlt || speaker.data.name} class="w-full h-full object-cover" />
-            ) : (
-              <div class="flex items-center justify-center w-full h-full bg-gray-700 text-gray-400">
-                {speaker.data.name.split(' ').map((n, index) => (
-                  <span key={index} class="text-3xl font-bold">{n[0]}</span>
-                ))}
-              </div>
-            )}
+    <div class="bg-gray-800 rounded-3xl p-8 border border-gray-700">
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+        {featuredSpeakers.map(speaker => (
+          <div class="bg-gray-900 rounded-3xl p-6 flex flex-col items-center text-center border border-gray-700 hover:border-accent-blue transition-colors">
+            <div class="w-32 h-32 rounded-full overflow-hidden mb-4 border-2 border-gray-600">
+              {speaker.data.photo ? (
+                <Image src={speaker.data.photo} alt={speaker.data.photoAlt || speaker.data.name} class="w-full h-full object-cover" />
+              ) : (
+                <div class="flex items-center justify-center w-full h-full bg-gray-700 text-gray-400">
+                  {speaker.data.name.split(' ').map((n, index) => (
+                    <span key={index} class="text-3xl font-bold">{n[0]}</span>
+                  ))}
+                </div>
+              )}
+            </div>
+            <h3 class="text-xl font-semibold text-white">{speaker.data.name}</h3>
+            <p class="text-sm text-accent-blue font-mono">{speaker.data.company || speaker.data.title || 'Speaker'}</p>
+            <p class="text-gray-400 mt-2">{speaker.data.bio || 'Cybersecurity expert'}</p>
           </div>
-          <h3 class="text-xl font-semibold text-white">{speaker.data.name}</h3>
-          <p class="text-sm text-accent-blue font-mono">{speaker.data.company || speaker.data.title || 'Speaker'}</p>
-          <p class="text-gray-400 mt-2">{speaker.data.bio || 'Cybersecurity expert'}</p>
-        </div>
-      ))}
+        ))}
+      </div>
     </div>
   </div>
-</div>
-
-<style>
-.grid {
-  display: grid;
-}
-</style>
+)}
