@@ -30,6 +30,12 @@ const eventSpeakers = allSpeakers.filter(speaker => speakerSlugs.has(speaker.id.
 
 // Check if there are any featured speakers for the event
 const hasFeaturedSpeakers = eventSpeakers.some(speaker => speaker.data.featured);
+
+// Get all sponsors for the current event
+const allSponsors = await getCollection('sponsors');
+const eventSponsors = allSponsors
+  .filter(sponsor => sponsor.data.years.includes(event.slug))
+  .sort((a, b) => (a.data.rank || 99) - (b.data.rank || 99));
 ---
 
 <!-- Event Content Section -->
@@ -95,46 +101,23 @@ const hasFeaturedSpeakers = eventSpeakers.some(speaker => speaker.data.featured)
           BSides Roanoke is made possible through the generous support of our sponsors.
           Interested in sponsoring? Contact us for sponsorship opportunities.
         </p>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <!-- Platinum Tier -->
-          <div class="bg-gray-900 rounded-2xl p-6 border border-accent-blue">
-            <h4 class="text-xl font-bold text-accent-blue mb-4">Platinum</h4>
-            <div class="space-y-4">
-              <div class="h-16 bg-gray-800 rounded-lg flex items-center justify-center">
-                <span class="text-gray-500">Your Logo Here</span>
-              </div>
-            </div>
+        {eventSponsors.length > 0 ? (
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {eventSponsors.map(sponsor => (
+              <a href={sponsor.data.website} target="_blank" rel="noopener noreferrer" class="block">
+                <div class="bg-white rounded-2xl p-6 border border-gray-700 h-full flex items-center justify-center hover:border-accent-blue transition-colors">
+                  {sponsor.data.logo ? (
+                    <img src={sponsor.data.logo} alt={sponsor.data.name} class="max-h-24" />
+                  ) : (
+                    <span class="text-gray-500">{sponsor.data.name}</span>
+                  )}
+                </div>
+              </a>
+            ))}
           </div>
-
-          <!-- Gold Tier -->
-          <div class="bg-gray-900 rounded-2xl p-6 border border-yellow-500">
-            <h4 class="text-xl font-bold text-yellow-500 mb-4">Gold</h4>
-            <div class="space-y-4">
-              <div class="h-12 bg-gray-800 rounded-lg flex items-center justify-center">
-                <span class="text-gray-500">Your Logo Here</span>
-              </div>
-              <div class="h-12 bg-gray-800 rounded-lg flex items-center justify-center">
-                <span class="text-gray-500">Your Logo Here</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Silver Tier -->
-          <div class="bg-gray-900 rounded-2xl p-6 border border-gray-400">
-            <h4 class="text-xl font-bold text-gray-400 mb-4">Silver</h4>
-            <div class="space-y-4">
-              <div class="h-10 bg-gray-800 rounded-lg flex items-center justify-center">
-                <span class="text-gray-500">Your Logo Here</span>
-              </div>
-              <div class="h-10 bg-gray-800 rounded-lg flex items-center justify-center">
-                <span class="text-gray-500">Your Logo Here</span>
-              </div>
-              <div class="h-10 bg-gray-800 rounded-lg flex items-center justify-center">
-                <span class="text-gray-500">Your Logo Here</span>
-              </div>
-            </div>
-          </div>
-        </div>
+        ) : (
+          <p class="text-gray-500">Sponsors for this year will be announced soon!</p>
+        )}
       </div>
     </div>
   </div>
