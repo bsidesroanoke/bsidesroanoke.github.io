@@ -1,6 +1,6 @@
 ---
 name: traceabl
-logo: ../../../public/images/traceable.png
+logo: ../../../images/traceable.png
 website: https://www.traceable.ai
 years: ["2023"]
 rank: 99

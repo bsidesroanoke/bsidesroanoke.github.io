@@ -89,6 +89,12 @@ const cfp = defineCollection({
   }),
 });
 
+const about = defineCollection({
+  schema: z.object({
+    title: z.string(),
+  }),
+});
+
 export const collections = {
   blogs,
   events,
@@ -96,4 +102,5 @@ export const collections = {
   speakers,
   sponsors,
   cfp,
+  about,
 };

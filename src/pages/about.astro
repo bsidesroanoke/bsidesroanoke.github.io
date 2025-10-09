@@ -1,21 +1,17 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { getEntry } from 'astro:content';
+
+const about = await getEntry('about', 'about');
+const { Content } = await about.render();
 ---
 <Layout title="About BSides Roanoke">
   <section id="about-page" class="container mx-auto px-4 py-16 md:py-24">
     <div class="max-w-3xl mx-auto">
-      <h1 class="text-4xl md:text-5xl font-bold mb-8 text-center">About BSides Roanoke</h1>
-      <div class="bg-gray-800 rounded-2xl p-6 md:p-8 border border-gray-700 text-lg text-gray-300 leading-relaxed space-y-6">
-        <p>
-          BSides Roanoke is a community-driven, non-profit cybersecurity conference, organized by and for the members of the local security community. Our goal is to create an open and collaborative environment where professionals, students, and enthusiasts can share knowledge, ideas, and experiences.
-        </p>
-        <p>
-          The event is part of the global Security BSides movement, which encourages the development of regional conferences that are more accessible and intimate than larger, more corporate events. We believe that security is a conversation, not a lecture, and we strive to foster that conversation here in the Roanoke Valley.
-        </p>
-        <p>
-          Join us for a day of learning, networking, and fun as we explore the latest trends in cybersecurity. Whether you're a seasoned expert or just starting your journey, there's something for everyone at BSides Roanoke.
-        </p>
-      </div>
+      <h1 class="text-4xl md:text-5xl font-bold mb-8 text-center">{about.data.title}</h1>
+      <article class="prose prose-invert max-w-none p-6 md:p-8 text-lg text-gray-300 leading-relaxed space-y-6">
+        <Content />
+      </article>
     </div>
   </section>
 </Layout>

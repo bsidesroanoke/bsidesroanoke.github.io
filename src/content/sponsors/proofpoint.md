@@ -1,6 +1,6 @@
 ---
 name: Proofpoint
-logo: "../../../public/images/pp.png"
+logo: "../../../images/pp.png"
 website: https://www.proofpoint.com/
 years: ["2024"]
 rank: 99

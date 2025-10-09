@@ -1,11 +1,19 @@
 ---
-const { title, eventSlug, hasTalks } = Astro.props;
+const { title, eventSlug, hasTalks, isPastEvent, latestEventSlug } = Astro.props;
 import { Image } from 'astro:assets';
 
 import logo from '../assets/b-sides-roanoke.svg';
 ---
 
 <header class="w-full bg-gray-900 bg-opacity-90 sticky top-0 z-50 backdrop-blur-sm shadow-lg border-b border-gray-700">
+  {isPastEvent && (
+    <div class="bg-yellow-500 text-black p-4 text-center">
+      You are viewing information from a previous event. 
+      <a href={`/events/${latestEventSlug}`} class="underline font-bold">
+        Click here to view the latest event data
+      </a>.
+    </div>
+  )}
   <div class="container mx-auto px-4 py-4 flex items-center justify-between">
     <!-- Logo -->
     <a href="/" class="flex items-center space-x-2">
@@ -24,10 +32,10 @@ import logo from '../assets/b-sides-roanoke.svg';
           <a href={`/speakers/${eventSlug}`} class="text-gray-300 hover:text-accent-blue transition-colors">Speakers</a>
           <a href={`/events/${eventSlug}#schedule`} class="text-gray-300 hover:text-accent-blue transition-colors">Schedule</a>
         </>
-      ) : <a href={`/cfp/${eventSlug}`} class="text-gray-300 hover:text-accent-blue transition-colors">CFP</a>}
+      ) : (!isPastEvent && <a href={`/cfp/${eventSlug}`} class="text-gray-300 hover:text-accent-blue transition-colors">CFP</a>)}
       <a href="/blog" class="text-gray-300 hover:text-accent-blue transition-colors">Blog</a>
       <a href="/events" class="text-gray-300 hover:text-accent-blue transition-colors">Prior Events</a>
-      <a href="/#register" class="bg-accent-blue text-gray-900 px-4 py-2 rounded-full font-semibold hover:bg-opacity-90 transition-colors glow-shadow">Register</a>
+      {!isPastEvent && <a href="/#register" class="bg-accent-blue text-gray-900 px-4 py-2 rounded-full font-semibold hover:bg-opacity-90 transition-colors glow-shadow">Register</a>}
     </nav>
 
     <!-- Mobile Menu Toggle -->
@@ -48,10 +56,10 @@ import logo from '../assets/b-sides-roanoke.svg';
         <a href={`/speakers/${eventSlug}`} class="text-2xl text-gray-200 hover:text-accent-blue transition-colors">Speakers</a>
         <a href={`/events/${eventSlug}#schedule`} class="text-2xl text-gray-200 hover:text-accent-blue transition-colors">Schedule</a>
       </>
-    ) : <a href={`/cfp/${eventSlug}`} class="text-2xl text-gray-200 hover:text-accent-blue transition-colors">CFP</a>}
+    ) : (!isPastEvent && <a href={`/cfp/${eventSlug}`} class="text-2xl text-gray-200 hover:text-accent-blue transition-colors">CFP</a>)}
     <a href="/blog" class="text-2xl text-gray-200 hover:text-accent-blue transition-colors">Blog</a>
     <a href="/events" class="text-2xl text-gray-200 hover:text-accent-blue transition-colors">Prior Events</a>
-    <a href="/#register" class="text-2xl text-gray-200 hover:text-accent-blue transition-colors bg-accent-blue text-gray-900 px-6 py-2 rounded-full glow-shadow">Register</a>
+    {!isPastEvent && <a href="/#register" class="text-2xl text-gray-200 hover:text-accent-blue transition-colors bg-accent-blue text-gray-900 px-6 py-2 rounded-full glow-shadow">Register</a>}
   </nav>
 </header>
 

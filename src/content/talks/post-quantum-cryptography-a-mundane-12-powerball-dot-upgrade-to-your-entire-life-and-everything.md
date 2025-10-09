@@ -6,7 +6,6 @@ abstract: "Quantum computing, driven by AI, will take over the world. You’ll l
 startTime: "2024-10-26T20:50:00Z"
 endTime: "2024-10-26T21:34:59Z"
 room: "Main Hall"
-abstract: ""
 eventSlug: "2024"
 featured: false
 ---
