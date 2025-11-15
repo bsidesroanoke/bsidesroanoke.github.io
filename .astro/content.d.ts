@@ -207,7 +207,9 @@ declare module 'astro:content' {
 }>;
 "speakers": Record<string, {
   id: string;
-  body?: string;
+  render(): Render[".md"];
+  slug: string;
+  body: string;
   collection: "speakers";
   data: InferEntrySchema<"speakers">;
   rendered?: RenderedContent;

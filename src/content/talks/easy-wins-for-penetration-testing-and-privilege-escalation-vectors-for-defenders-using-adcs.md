@@ -5,7 +5,7 @@ speakers:
 startTime: "2024-10-26T15:00:00Z"
 endTime: "2024-10-26T15:49:59Z"
 room: "Main Hall"
-abstract: ""
 eventSlug: "2023"
 featured: false
 ---
+Active Directory Certificate Services is widely deployed in many corporate & enterprise environments. It is also heavily misconfigured in many of them. If you want to learn how to get easy wins on penetration tests, this is right up your alley. For defenders, this is a great way to learn about privilege escalation vectors in your environment.

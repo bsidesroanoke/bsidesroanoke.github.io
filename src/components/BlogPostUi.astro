@@ -21,7 +21,7 @@ const { title, description, heroImage } = Astro.props as Props;
     )}
     <div class="relative z-10 p-6 md:p-12 bg-gray-900 bg-opacity-70 rounded-3xl">
       <h1 class="text-4xl md:text-6xl font-extrabold text-white mb-4">{title}</h1>
-      {description && <p class="text-xl md:text-2xl text-gray-300 mb-8">{description}</p>}
+      {description && <p class="text-xl md:text-2xl text-gray-300 mb-8 whitespace-pre-line">{description}</p>}
     </div>
   </header>
 )}

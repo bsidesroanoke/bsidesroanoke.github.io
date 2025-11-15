@@ -22,7 +22,7 @@ const renderedVenueInfo = Markdoc.renderers.html(Markdoc.transform(Markdoc.parse
     <div class="max-w-3xl mx-auto">
       <h1 class="text-4xl md:text-5xl font-extrabold text-white mb-8 text-center">Venue & Parking for {data.title}</h1>
       <div class="bg-gray-800 rounded-2xl p-8 border border-gray-700">
-        <div class="prose prose-invert max-w-none prose-h2:mt-0" set:html={renderedVenueInfo} />
+        <div class="prose prose-invert max-w-none prose-h2:mt-0 whitespace-pre-line" set:html={renderedVenueInfo} />
       </div>
     </div>
   </section>

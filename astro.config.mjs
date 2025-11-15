@@ -13,7 +13,9 @@ export default defineConfig({
   publicDir: 'public',
 
   // Add the content collection integration
-  integrations: [tailwind(), markdoc(), react()],
+  integrations: [tailwind(), markdoc({
+    allowHTML: true
+  }), react()],
 
   // Configure content collections (standard approach)
   vite: {

@@ -5,7 +5,7 @@ speakers:
 startTime: "2024-10-26T19:00:00Z"
 endTime: "2024-10-26T19:44:59Z"
 room: "Main Hall"
-abstract: "Want to know which attack your organization is most likely to experience?  This crash course in risk quantification will open your eyes to the fast path of forecasting.  Fully functional models and training materials available FREE."
 eventSlug: "2024"
 featured: false
 ---
+Want to know which attack your organization is most likely to experience?  This crash course in risk quantification will open your eyes to the fast path of forecasting.  Fully functional models and training materials available FREE.
