@@ -32,7 +32,7 @@ const sortedSpeakers = eventSpeakers.sort((a, b) => a.data.name.localeCompare(b.
 
     <div class="max-w-4xl mx-auto">
       {sortedSpeakers.map((speaker: any) => {
-        const ast = Markdoc.parse(speaker.data.bio || '');
+        const ast = Markdoc.parse(speaker.body || '');
         const content = Markdoc.transform(ast);
         const html = Markdoc.renderers.html(content);
         return (

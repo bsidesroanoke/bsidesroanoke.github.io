@@ -34,7 +34,7 @@ export async function getStaticPaths() {
 const { speaker, talks } = Astro.props;
 const { data, body } = speaker;
 
-const ast = Markdoc.parse(data.bio || '');
+const ast = Markdoc.parse(body || '');
 const content = Markdoc.transform(ast);
 const html = Markdoc.renderers.html(content);
 
@@ -87,7 +87,7 @@ const cleanTitle = (title: string) => title.replace(/\[([^\]]+)\]\([^)]+\)/g, '$
         )}
       </header>
 
-      {data.bio && (
+      {body && (
         <div class="bg-gray-800 rounded-3xl p-8 border border-gray-700 mt-8">
           <h2 class="text-2xl font-bold text-white mb-4">Bio</h2>
           <div class="prose prose-invert max-w-none text-lg leading-relaxed" set:html={html} />
@@ -103,7 +103,7 @@ const cleanTitle = (title: string) => title.replace(/\[([^\]]+)\]\([^)]+\)/g, '$
               <ul class="list-disc list-inside space-y-2">
                 {eventTalks.map(talk => (
                   <li>
-                    <a href={`/talks/${talk.slug}`} class="text-blue-400 hover:underline text-lg">
+                    <a href={`/talks/${eventSlug}#${talk.slug}`} class="text-blue-400 hover:underline text-lg">
                       {cleanTitle(talk.title)}
                     </a>
                   </li>
