@@ -8,16 +8,17 @@ export async function getStaticPaths() {
   // Only create pages for events that have venue_parking info
   const eventsWithVenueInfo = events.filter(event => event.data.venue_parking);
   return eventsWithVenueInfo.map(event => ({
-    params: { year: event.data.slug },
+    params: { slug: event.id.replace('.md', '') },
     props: { event },
   }));
 }
 
 const { event } = Astro.props;
 const { data } = event;
+const slug = event.id.replace('.md', '');
 const renderedVenueInfo = Markdoc.renderers.html(Markdoc.transform(Markdoc.parse(data.venue_parking || '')));
 ---
-<Layout title={`Venue & Parking - ${data.title}`} eventSlug={data.slug}>
+<Layout title={`Venue & Parking - ${data.title}`} eventSlug={slug}>
   <section class="container mx-auto px-4 py-16 md:py-24">
     <div class="max-w-3xl mx-auto">
       <h1 class="text-4xl md:text-5xl font-extrabold text-white mb-8 text-center">Venue & Parking for {data.title}</h1>

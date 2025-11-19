@@ -18,6 +18,14 @@ export async function getStaticPaths() {
 
 const { event } = Astro.props;
 const slug = event.id.replace('.md', '');
+
+// Redirect to home if this is the latest event
+const allEvents = await getCollection('events');
+const latestEvent = allEvents.sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime())[0];
+if (latestEvent.id === event.id) {
+  return Astro.redirect('/');
+}
+
 const eventData = { ...event.data, slug };
 const renderedContent = Markdoc.renderers.html(Markdoc.transform(Markdoc.parse(event.body || '')));
 export const prerender = true;

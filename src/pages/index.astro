@@ -12,6 +12,7 @@ const events = await getCollection('events');
 const cfps = await getCollection('cfp');
 // Create a sorted copy to avoid modifying the original array, then get the latest.
 const latestEvent = [...events].sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime())[0];
+const latestEventSlug = latestEvent.id.replace('.md', '');
 const renderedContent = Markdoc.renderers.html(Markdoc.transform(Markdoc.parse(latestEvent.body || '')));
 
 // Determine which action buttons to show for the hero section
@@ -20,14 +21,14 @@ if (latestEvent.data.register) {
   registrationButton = { text: 'Register Now', href: latestEvent.data.register };
 }
 let cfpButton = null;
-const latestCfp = cfps.find(cfp => cfp.data.year === latestEvent.data.slug);
+const latestCfp = cfps.find(cfp => cfp.id.replace('.md', '') === latestEventSlug);
 if (latestCfp) {
-  cfpButton = { text: 'Call for Papers', href: `/cfp/${latestEvent.data.slug}` };
+  cfpButton = { text: 'Call for Papers', href: `/cfp/${latestEventSlug}` };
 }
 
 export const prerender = true;
 ---
-<Layout title="Home" eventSlug={latestEvent.data.slug}>
+<Layout title="Home" eventSlug={latestEventSlug}>
 
   <!-- Event Hero Section -->
   <header id="event-hero" class="w-full py-20 md:py-32 flex items-center justify-center text-center relative overflow-hidden bg-gray-800">
@@ -43,7 +44,7 @@ export const prerender = true;
         <span class="bg-accent-green text-gray-900 px-6 py-2 rounded-full font-semibold">
           {new Date(latestEvent.data.date).toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' })}
         </span>
-        <a href={`/venue/${latestEvent.data.slug}`} class="bg-gray-700 text-gray-100 px-6 py-2 rounded-full font-semibold hover:bg-gray-600 transition-colors">
+        <a href={`/venue/${latestEventSlug}`} class="bg-gray-700 text-gray-100 px-6 py-2 rounded-full font-semibold hover:bg-gray-600 transition-colors">
           {latestEvent.data.location}
         </a>
       </div>

@@ -5,6 +5,7 @@ import { getCollection } from 'astro:content';
 // Get all events and sort by date (most recent first)
 const events = await getCollection('events');
 const sortedEvents = events.sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
+const pastEvents = sortedEvents.slice(1); // Hide the latest event (current)
 
 // Format the slug for dynamic routing
 function formatSlug(id: string) {
@@ -17,7 +18,7 @@ function formatSlug(id: string) {
     <h1 class="text-5xl font-extrabold mb-8 text-center">BSides Roanoke Events</h1>
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8 w-full max-w-6xl">
-    {sortedEvents.map((event: any) => (
+    {pastEvents.map((event: any) => (
       <div class="bg-gray-800 rounded-3xl p-6 border border-gray-700 hover:border-accent-blue transition-colors">
         <h2 class="text-3xl font-bold mb-2">{event.data.title}</h2>
         <p class="text-gray-400 mb-1"><strong>Date:</strong> {new Date(event.data.date).toLocaleDateString()}</p>
