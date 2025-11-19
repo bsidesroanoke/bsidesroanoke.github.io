@@ -3,7 +3,7 @@ title: "The More It Changes, the More It Stays the Same"
 speakers:
   - randy-marchany
 startTime: "2024-10-26T17:10:00Z"
-endTime: "2024-10-26T17:54:59Z"
+endTime: "2024-10-26T17:55:00Z"
 room: "Main Hall"
 eventSlug: "2024"
 featured: false

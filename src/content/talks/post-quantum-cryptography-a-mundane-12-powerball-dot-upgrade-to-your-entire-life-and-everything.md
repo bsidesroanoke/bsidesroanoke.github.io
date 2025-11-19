@@ -3,7 +3,7 @@ title: "Post Quantum Cryptography: A Mundane-12 Powerball Dot Upgrade to Your En
 speakers:
   - schr0ding3r
 startTime: "2024-10-26T20:50:00Z"
-endTime: "2024-10-26T21:34:59Z"
+endTime: "2024-10-26T21:35:00Z"
 room: "Main Hall"
 eventSlug: "2024"
 featured: false

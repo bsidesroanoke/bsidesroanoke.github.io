@@ -3,7 +3,7 @@ title: "Beyond the Flipper - A guide to basic wireless communication protocols"
 speakers:
   - brandon-lester
 startTime: "2024-10-26T17:10:00Z"
-endTime: "2024-10-26T17:54:59Z"
+endTime: "2024-10-26T17:55:00Z"
 room: "Second Room"
 eventSlug: "2024"
 featured: false

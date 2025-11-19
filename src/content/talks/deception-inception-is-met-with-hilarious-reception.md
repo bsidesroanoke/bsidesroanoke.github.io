@@ -3,7 +3,7 @@ title: "Deception inception is met with hilarious reception"
 speakers:
   - justin-varner
 startTime: "2024-10-26T15:20:00Z"
-endTime: "2024-10-26T16:04:59Z"
+endTime: "2024-10-26T16:05:00Z"
 room: "Main Hall"
 eventSlug: "2024"
 featured: false

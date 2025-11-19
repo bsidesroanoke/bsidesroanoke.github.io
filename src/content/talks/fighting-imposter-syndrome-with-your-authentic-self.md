@@ -2,8 +2,8 @@
 title: "Fighting Imposter Syndrome with your Authentic Self"
 speakers:
   - kennedy-toomey
-startTime: "2024-10-26T14:00:00Z"
-endTime: "2024-10-26T14:49:59Z"
+startTime: "2023-10-26T14:00:00Z"
+endTime: "2023-10-26T14:50:00Z"
 room: "Main Hall"
 eventSlug: "2023"
 featured: false

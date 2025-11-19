@@ -81,7 +81,7 @@ function formatTimeSlot(start: string | undefined, end: string | undefined) {
       time: formatTimeSlot(talk.data.startTime, talk.data.endTime),
       room: talk.data.room,
       track: talk.data.track || 'General Session',
-      abstract: talk.data.abstract || '' // Only pass the abstract from frontmatter
+      abstract: talk.body || talk.data.abstract || '' // Use body as abstract, fallback to frontmatter
     }))} eventDate={event?.date || 'Unknown date'} eventSlug={event?.slug} />
   ) : (
     <p class="text-center text-gray-400">No talks available for this event.</p>

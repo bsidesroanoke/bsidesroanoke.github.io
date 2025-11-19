@@ -3,7 +3,7 @@ title: "Taking over Enterprise Networks via Microsoft SCCM"
 speakers:
   - logan-diomedi
 startTime: "2024-10-26T17:10:00Z"
-endTime: "2024-10-26T17:54:59Z"
+endTime: "2024-10-26T17:55:00Z"
 room: "Main Hall"
 eventSlug: "2024"
 featured: false

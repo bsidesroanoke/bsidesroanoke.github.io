@@ -3,7 +3,7 @@ title: "Cyber Risk Quantification – Pitfalls and Fixes"
 speakers:
   - charlene-deaver-vazquez
 startTime: "2024-10-26T19:00:00Z"
-endTime: "2024-10-26T19:44:59Z"
+endTime: "2024-10-26T19:45:00Z"
 room: "Main Hall"
 eventSlug: "2024"
 featured: false

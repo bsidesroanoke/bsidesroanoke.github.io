@@ -4,7 +4,7 @@ speakers:
   - kevin-clark
   - skyler-knecht
 startTime: "2024-10-26T19:55:00Z"
-endTime: "2024-10-26T20:39:59Z"
+endTime: "2024-10-26T20:40:00Z"
 room: "Main Hall"
 eventSlug: "2024"
 featured: false

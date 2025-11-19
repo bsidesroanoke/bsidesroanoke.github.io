@@ -3,7 +3,7 @@ title: "Encrypting Your Infrastructure Without Getting Fired"
 speakers:
   - matt-moen
 startTime: "2024-10-26T14:25:00Z"
-endTime: "2024-10-26T15:09:59Z"
+endTime: "2024-10-26T15:10:00Z"
 room: "Main Hall"
 eventSlug: "2024"
 featured: false

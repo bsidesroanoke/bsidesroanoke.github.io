@@ -3,7 +3,7 @@ title: "Modifying Impacket for Better OpSec"
 speakers:
   - ryan-odonnell
 startTime: "2024-10-26T19:00:00Z"
-endTime: "2024-10-26T21:34:59Z"
+endTime: "2024-10-26T21:35:00Z"
 room: "Main Hall"
 eventSlug: "2024"
 featured: false

@@ -3,7 +3,7 @@ title: "Trailblazing through Data: A Jupyter Anomaly Quest"
 speakers:
   - kai-iyer
 startTime: "2024-10-26T18:05:00Z"
-endTime: "2024-10-26T18:49:59Z"
+endTime: "2024-10-26T18:50:00Z"
 room: "Second Room"
 eventSlug: "2024"
 featured: false
