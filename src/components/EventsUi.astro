@@ -23,13 +23,16 @@ const allTalks = await getCollection('talks');
 const hasTalksForEvent = event?.slug ? allTalks.some(talk => talk.data.eventSlug === event.slug) : false;
 
 // Get all speakers for the current event
+// Get all speakers for the current event
 const allSpeakers = await getCollection('speakers');
 const eventTalks = allTalks.filter(talk => talk.data.eventSlug === event.slug);
 const speakerSlugs = new Set(eventTalks.flatMap(talk => talk.data.speakers || []));
 const eventSpeakers = allSpeakers.filter(speaker => speakerSlugs.has(speaker.id.replace(/\.md$/, '')));
 
 // Check if there are any featured speakers for the event
-const hasFeaturedSpeakers = eventSpeakers.some(speaker => speaker.data.featured);
+const hasFeaturedSpeakers = allSpeakers.some(speaker => 
+  speaker.data.featured && Array.isArray(speaker.data.featured) && speaker.data.featured.includes(event.slug || '')
+);
 
 // Get all sponsors for the current event
 const allSponsors = await getCollection('sponsors');

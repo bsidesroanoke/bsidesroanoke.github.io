@@ -60,7 +60,7 @@ const speakers = defineCollection({
     bio: z.string().optional(),
     company: z.string().optional(),
     socialLinks: z.array(z.string()).optional(),
-    featured: z.boolean().optional(),
+    featured: z.array(z.string()).optional(),
     photo: image().optional(),
     photoAlt: z.string().optional(),
   }),

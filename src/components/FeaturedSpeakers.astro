@@ -13,14 +13,10 @@ const { event } = Astro.props as Props;
 // Get all speakers
 const allSpeakers = await getCollection('speakers');
 
-// Get all talks for the current event to find the speakers for this event
-const allTalks = await getCollection('talks');
-const eventTalks = allTalks.filter(talk => talk.data.eventSlug === event.slug);
-const speakerSlugs = new Set(eventTalks.flatMap(talk => talk.data.speakers || []));
-const eventSpeakers = allSpeakers.filter(speaker => speakerSlugs.has(speaker.id.replace(/\.md$/, '')));
-
 // Filter for featured speakers for this event
-const featuredSpeakers = eventSpeakers.filter(speaker => speaker.data.featured);
+const featuredSpeakers = allSpeakers.filter(speaker => 
+  speaker.data.featured && Array.isArray(speaker.data.featured) && speaker.data.featured.includes(event.slug || '')
+);
 ---
 
 {featuredSpeakers.length > 0 && (
