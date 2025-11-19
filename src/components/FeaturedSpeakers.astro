@@ -37,7 +37,7 @@ const featuredSpeakers = allSpeakers.filter(speaker =>
                 </div>
               )}
             </div>
-            <h3 class="text-xl font-semibold text-white">{speaker.data.name}</h3>
+            <h3 class="text-xl font-semibold text-white">{speaker.data.name}{speaker.data.pronouns && <span class="text-sm font-normal text-gray-400"> ({speaker.data.pronouns})</span>}</h3>
             <p class="text-sm text-accent-blue font-mono">{speaker.data.company || speaker.data.title || 'Speaker'}</p>
             <p class="text-gray-400 mt-2">{speaker.data.bio || 'Cybersecurity expert'}</p>
           </div>

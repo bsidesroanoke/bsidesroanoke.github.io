@@ -11,13 +11,15 @@ export interface Props {
 
 const { event } = Astro.props as Props;
 
-// Get all speakers and create a map of slug to name
+// Get all speakers and create a map of slug to name and pronouns
 const allSpeakers = await getCollection('speakers');
 const speakerMap = new Map();
+const pronounsMap = new Map();
 for (const speaker of allSpeakers) {
   if (speaker && speaker.id) {
     const slug = speaker.id.replace(/\.md$/, '');
     speakerMap.set(slug, speaker.data.name);
+    pronounsMap.set(slug, speaker.data.pronouns);
   }
 }
 
@@ -74,6 +76,7 @@ function formatTimeSlot(start: string | undefined, end: string | undefined) {
         ? talk.data.speakers.map(slug => ({
             name: speakerMap.get(slug) || slug,
             slug: slug,
+            pronouns: pronounsMap.get(slug)
           }))
         : [],
       startTime: talk.data.startTime,

@@ -12,9 +12,10 @@ export async function getStaticPaths() {
 
 const { year } = Astro.params;
 
-// Get all speakers and create a map for speaker names
+// Get all speakers and create maps for speaker names and pronouns
 const speakers = await getCollection('speakers');
 const speakerMap = new Map(speakers.map(s => [s.id.replace(/\.md$/, ''), s.data.name]));
+const pronounsMap = new Map(speakers.map(s => [s.id.replace(/\.md$/, ''), s.data.pronouns]));
 
 // Get all talks for the current year and sort by date
 const talks = (await getCollection('talks')).filter(talk => talk.data.eventSlug === year);
@@ -58,6 +59,7 @@ const sortedTalks = talks.sort((a, b) => {
                   <>
                     <a href={`/speakers/${speakerSlug}`} class="text-accent-blue hover:underline">
                       {speakerMap.get(speakerSlug) || speakerSlug}
+                      {pronounsMap.get(speakerSlug) && <span class="text-sm font-normal text-gray-400"> ({pronounsMap.get(speakerSlug)})</span>}
                     </a>
                     {index < data.speakers.length - 1 && ', '}
                   </>

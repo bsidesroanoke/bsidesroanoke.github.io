@@ -64,7 +64,7 @@ export const prerender = true;
   </header>
 
   <!--- Events Layout -->
-  <EventsUi event={latestEvent.data}>
+  <EventsUi event={{ ...latestEvent.data, slug: latestEventSlug }}>
     <Fragment set:html={renderedContent} />
   </EventsUi>
 

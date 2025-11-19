@@ -44,7 +44,7 @@ const sortedSpeakers = eventSpeakers.sort((a, b) => a.data.name.localeCompare(b.
                 )}
                 <h2 class="text-2xl font-bold mt-4">
                   <a href={`/speakers/${speaker.id.replace(/\.md$/, '')}`} class="hover:text-accent-blue transition-colors">
-                    {speaker.data.name}
+                    {speaker.data.name}{speaker.data.pronouns && <span class="text-lg font-normal text-gray-400"> ({speaker.data.pronouns})</span>}
                   </a>
                 </h2>
               </div>

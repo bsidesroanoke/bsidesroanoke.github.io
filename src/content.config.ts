@@ -57,6 +57,7 @@ const speakers = defineCollection({
     name: z.string(),
     title: z.string().optional(),
     company: z.string().optional(),
+    pronouns: z.string().optional(),
     socialLinks: z.array(z.string()).optional(),
     featured: z.array(z.string()).optional(),
     photo: image().optional(),

@@ -22,12 +22,12 @@ const parseTimeString = (timeStr: string): { startTime?: string, endTime?: strin
     return { startTime: formatMatch[1], endTime: formatMatch[2] };
   }
 
-// Check if it's an ISO time range like "2025-10-26T10:00:00Z - 2025-10-26T11:00:00Z"
-const isoMatch = timeStr.match(/(\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z)\s*-\s*(\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z)/);
-if (isoMatch) {
-  // Preserve ISO format for consistent sorting and display
-  return { startTime: isoMatch[1], endTime: isoMatch[2] };
-}
+  // Check if it's an ISO time range like "2025-10-26T10:00:00Z - 2025-10-26T11:00:00Z"
+  const isoMatch = timeStr.match(/(\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z)\s*-\s*(\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z)/);
+  if (isoMatch) {
+    // Preserve ISO format for consistent sorting and display
+    return { startTime: isoMatch[1], endTime: isoMatch[2] };
+  }
 
   // If not in expected format, try to use as-is
   if (timeStr.includes('-')) {
@@ -87,7 +87,7 @@ interface Talk {
   id: number | string;
   slug: string;
   title: string;
-  speaker: { name: string; slug: string }[];
+  speaker: { name: string; slug: string; pronouns?: string }[];
   startTime?: string; // Start time in various formats (ISO or local)
   endTime?: string;   // End time in various formats (ISO or local)
   room: string;
@@ -95,6 +95,8 @@ interface Talk {
   time?: string;      // Time field for backward compatibility
   abstract: string;
 }
+
+
 
 // Helper function to strip markdown from a string
 const stripMarkdown = (markdown: string): string => {
@@ -201,7 +203,7 @@ const TalkModal = ({ talk, onClose, eventSlug }: { talk: Talk | null, onClose: (
               talk.speaker.map((s, index) => (
                 <React.Fragment key={s.slug}>
                   <a href={`/speakers/${s.slug}`} className="hover:underline">
-                    {s.name}
+                    {s.name}{s.pronouns && <span className="text-sm font-normal text-gray-400"> ({s.pronouns})</span>}
                   </a>
                   {index < talk.speaker.length - 1 && ', '}
                 </React.Fragment>
@@ -217,7 +219,7 @@ const TalkModal = ({ talk, onClose, eventSlug }: { talk: Talk | null, onClose: (
           />
         </div>
         <div className="p-4 bg-slate-900/50 rounded-b-2xl text-right">
-           <button
+          <button
             onClick={onClose}
             className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
           >
@@ -313,7 +315,7 @@ const ImprovedSchedule = ({ talks = [], eventDate, eventSlug }: { talks: Talk[],
         <div className="text-center text-gray-400 text-lg mt-16">No talks found matching your criteria.</div>
       )}
 
-        {/* Responsive schedule grid with reduced gap */}
+      {/* Responsive schedule grid with reduced gap */}
       <div className="grid gap-2 md:gap-3">
 
         {sortedTalks.map(talk => (

@@ -110,6 +110,7 @@ In today's digital landscape, web security is more critical than ever. Let's exp
 | `name` | string | Yes | Full name |
 | `title` | string | No | Job title |
 | `company` | string | No | Company name |
+| `pronouns` | string | No | Pronouns (e.g., "he/him", "she/her", "they/them") |
 | `socialLinks` | array<string> | No | List of social media URLs |
 | `featured` | array<string> | No | List of event slugs this speaker is featured in |
 | `photo` | image | No | Path to speaker photo (relative to file) |
