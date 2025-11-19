@@ -17,12 +17,14 @@ export async function getStaticPaths() {
 }
 
 const { event } = Astro.props;
+const slug = event.id.replace('.md', '');
+const eventData = { ...event.data, slug };
 const renderedContent = Markdoc.renderers.html(Markdoc.transform(Markdoc.parse(event.body || '')));
 export const prerender = true;
 ---
 
-<Layout title={event.data.title} eventSlug={event.data.slug}>
-  <EventsUi event={event.data}>
+<Layout title={eventData.title} eventSlug={slug}>
+  <EventsUi event={eventData}>
     <Fragment set:html={renderedContent} />
   </EventsUi>
 </Layout>

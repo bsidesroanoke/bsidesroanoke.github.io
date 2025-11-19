@@ -6,7 +6,7 @@ import Markdoc from '@markdoc/markdoc';
 export async function getStaticPaths() {
   const cfps = await getCollection('cfp');
   return cfps.map(cfp => ({
-    params: { year: cfp.data.year },
+    params: { slug: cfp.id.replace('.md', '') },
     props: { cfp },
   }));
 }

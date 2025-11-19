@@ -36,9 +36,11 @@ Drop a `.md` file in `src/content/talks/`:
 ```markdown
 ---
 title: "The Future of AI in Threat Detection"
-speakers: ["John Doe"]
-startTime: "2024-10-26T09:00:00Z"
-endTime: "2024-10-26T09:50:00Z"
+speakers: 
+  - "john-doe"
+  - "jane-smith"
+startTime: "2024-10-26T09:00:00"
+endTime: "2024-10-26T09:50:00"
 room: "Main Hall"
 abstract: "Exploring AI applications in modern threat detection"
 eventSlug: "2024"
@@ -58,15 +60,12 @@ name: "John Doe"
 title: "Senior Security Engineer"
 twitter: "@johndoe"
 bio: "Seasoned security professional with 15+ years experience in ethical hacking and threat detection"
-featured: true
-photo: "../../../public/b-sides-roanoke.svg"
+featured: 
+  - "2024"
+  - "2025"
+photo: "../../../images/john-doe.jpg"
 photoAlt: "John Doe, Senior Security Engineer"
 ---
-
-# John Doe
-
-![Speaker Photo](../../../public/b-sides-roanoke.svg)
-
 John is a wizard with firewalls and a guru of secure coding practices. When not hacking the planet, he enjoys long walks on the beach and pentesting cloud infrastructure.
 ```
 
@@ -80,21 +79,83 @@ date: 2023-10-01
 excerpt: "An overview of current web security practices"
 tags: ["security", "web", "best-practices"]
 ---
-
-# Understanding Modern Web Security
-
 In today's digital landscape, web security is more critical than ever. Let's explore the latest threats and defenses...
 ```
+
+## 📚 Content Collection Reference
+
+### Events (`src/content/events/`)
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| `title` | string | Yes | Name of the event |
+| `date` | string | Yes | Date of the event (YYYY-MM-DD) |
+| `location` | string | Yes | Physical location |
+| `featured` | boolean | No | Whether to feature this event |
+| `venue_parking` | string | No | Parking information |
+| `register` | string | No | Registration link |
+| `description` | string | No | Short description |
+| `heroImage` | image | No | Banner image |
+| `heroImageAlt` | string | No | Alt text for banner |
+
+### Talks (`src/content/talks/`)
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| `title` | string | Yes | Title of the talk |
+| `speakers` | array<string> | No | List of speaker IDs (filenames without .md) |
+| `startTime` | datetime | No | ISO 8601 start time (YYYY-MM-DDTHH:mm:ss) |
+| `endTime` | datetime | No | ISO 8601 end time (YYYY-MM-DDTHH:mm:ss) |
+| `room` | string | Yes | Room name |
+| `eventSlug` | string | No | Slug of the associated event |
+| `featured` | boolean | No | Whether to feature this talk |
+| `abstract` | string | No | Short summary |
+
+### Speakers (`src/content/speakers/`)
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| `name` | string | Yes | Full name |
+| `title` | string | No | Job title |
+| `company` | string | No | Company name |
+| `socialLinks` | array<string> | No | List of social media URLs |
+| `featured` | array<string> | No | List of event slugs this speaker is featured in |
+| `photo` | image | No | Path to speaker photo (relative to file) |
+| `photoAlt` | string | No | Alt text for photo |
+
+### Sponsors (`src/content/sponsors/`)
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| `name` | string | Yes | Sponsor name |
+| `logo` | string | No | Path to logo image |
+| `website` | url | No | Link to sponsor website |
+| `years` | array<string> | Yes | List of event slugs sponsored |
+| `rank` | number | No | Sorting order (lower is higher priority) |
+
+### Blogs (`src/content/blogs/`)
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| `title` | string | Yes | Blog post title |
+| `description` | string | No | Short description/excerpt |
+| `pubDate` | string | Yes | Publication date |
+| `cover` | image | No | Cover image |
+| `coverAlt` | string | No | Alt text for cover |
+| `author` | string | No | Author name |
+| `tags` | array<string> | No | List of tags |
+
+### CFP (`src/content/cfp/`)
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| `title` | string | Yes | Title (e.g. "Call for Papers") |
+| `closeDate` | string | Yes | Closing date |
+| `link` | url | Yes | Link to CFP submission form |
 
 **Pro tip**: After adding content, run `npm run dev` to see your changes live!
 
 ## 📝 TODO
 
-- [ ] Update talks collection documentation to reflect use of `speakers` array instead of single `speaker`
-- [ ] Document proper time format for talks (`startTime`, `endTime` as ISO datetime)
-- [ ] Add complete field reference for each collection type
-- [ ] Clarify that talks can have multiple speakers
-- [ ] Update speaker documentation to include image handling with `photo`/`photoAlt`
+- [x] Update talks collection documentation to reflect use of `speakers` array instead of single `speaker`
+- [x] Document proper time format for talks (`startTime`, `endTime` as ISO datetime)
+- [x] Add complete field reference for each collection type
+- [x] Clarify that talks can have multiple speakers
+- [x] Update speaker documentation to include image handling with `photo`/`photoAlt`
 
 ## 🛠️ How do I test&debug locally without an AI agent?
 

@@ -22,7 +22,6 @@ const events = defineCollection({
     title: z.string(),
     date: z.string(),
     location: z.string(),
-    slug: z.string(),
     featured: z.boolean().optional(),
     venue_parking: z.string().optional(),
     register: z.string().optional(),
@@ -43,7 +42,6 @@ const talks = defineCollection({
     timeSlot: z.string().optional(),
     timeSlotStart: z.string().optional(),
     room: z.string(),
-    location: z.string().optional(),
     speakers: z.array(z.string()).optional(),
     abstract: z.string().optional(),
     eventSlug: z.string().optional(),
@@ -57,7 +55,6 @@ const speakers = defineCollection({
   schema: ({ image }) => z.object({
     name: z.string(),
     title: z.string().optional(),
-    bio: z.string().optional(),
     company: z.string().optional(),
     socialLinks: z.array(z.string()).optional(),
     featured: z.array(z.string()).optional(),
@@ -83,7 +80,6 @@ const cfp = defineCollection({
   loader: glob({ pattern: ['**/*.md'], base: './src/content/cfp' }),
   schema: z.object({
     title: z.string(),
-    year: z.string(),
     closeDate: z.string(),
     link: z.string().url(),
   }),
