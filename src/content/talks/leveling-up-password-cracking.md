@@ -4,6 +4,7 @@ speakers:
   - james-jimmy-ririe
 startTime: "2024-10-26T14:25:00Z"
 endTime: "2024-10-26T15:10:00Z"
+track: "General Session"
 room: "Second Room"
 eventSlug: "2024"
 featured: false

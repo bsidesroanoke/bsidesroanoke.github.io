@@ -25,9 +25,6 @@ date: 2025-04-15
 location: "Roanoke, VA"
 description: "Annual information security conference"
 ---
-
-# BSides Roanoke 2025
-
 Join us for another year of hacking, learning, and questionable life choices in the name of cybersecurity!
 ```
 
@@ -46,9 +43,6 @@ abstract: "Exploring AI applications in modern threat detection"
 eventSlug: "2024"
 featured: false
 ---
-
-# The Future of AI in Threat Detection
-
 An exciting dive into how artificial intelligence is revolutionizing the way we detect and respond to cyber threats.
 ```
 
@@ -105,6 +99,7 @@ In today's digital landscape, web security is more critical than ever. Let's exp
 | `startTime` | datetime | No | ISO 8601 start time (YYYY-MM-DDTHH:mm:ss) |
 | `endTime` | datetime | No | ISO 8601 end time (YYYY-MM-DDTHH:mm:ss) |
 | `room` | string | Yes | Room name |
+| `track` | string | No | Track name for color coding |
 | `eventSlug` | string | No | Slug of the associated event |
 | `featured` | boolean | No | Whether to feature this talk |
 | `abstract` | string | No | Short summary |
@@ -149,32 +144,48 @@ In today's digital landscape, web security is more critical than ever. Let's exp
 
 **Pro tip**: After adding content, run `npm run dev` to see your changes live!
 
-## 📝 TODO
 
-- [x] Update talks collection documentation to reflect use of `speakers` array instead of single `speaker`
-- [x] Document proper time format for talks (`startTime`, `endTime` as ISO datetime)
-- [x] Add complete field reference for each collection type
-- [x] Clarify that talks can have multiple speakers
-- [x] Update speaker documentation to include image handling with `photo`/`photoAlt`
 
-## 🛠️ How do I test&debug locally without an AI agent?
+## 🌱 Fresh Install Guide (For Non-Developers)
+If you're new to this and just want to get the site running on your machine:
 
-### Getting Started (The Human Way)
-1. **Install Node.js** (v16+) if you haven't already
-2. **Clone and setup**:
-   ```bash
-   git clone <repository-url>
-   cd bsides-astro
-   npm install
-   ```
+1.  **Install Node.js**: Download and install the "LTS" version from [nodejs.org](https://nodejs.org/).
+2.  **Get the Code**: Download this folder or clone it with git.
+3.  **Open Terminal**: Open your computer's terminal (Command Prompt on Windows, Terminal on Mac).
+4.  **Navigate**: Go to the project folder:
+    ```bash
+    cd path/to/bsidesroanoke.github.io
+    ```
+5.  **Install Dependencies**: Run this command to download all the tools the site needs (this might take a minute):
+    ```bash
+    npm install
+    ```
+6.  **Start the Site**: Run this command to turn it on:
+    ```bash
+    npm run dev
+    ```
+7.  **View It**: Open your web browser and go to `http://localhost:4321`.
 
-3. **Start the dev server**:
-   ```bash
-   npm run dev
-   ```
-   Open `http://localhost:4321` in your browser
+## 🧠 Good to Know
 
-### Manual Debugging 101
+### Navigation Buttons
+You might notice that the **Speakers** and **Schedule** buttons don't always appear in the top navigation bar. This is intentional!
+- These buttons **only appear** if there are talks added for that specific event.
+- If you're setting up a new year (e.g., 2026) and haven't added talks yet, don't panic, the buttons will show up automatically once you add your first talk.
+
+### Track Color Coding
+The schedule automatically color-codes talks based on their `track` field. To get these pretty colors, make sure you use one of these exact track names in your talk files:
+
+- `Red Team` (Red)
+- `Blue Team` (Blue)
+- `Cyber Fundamentals` (Green)
+- `Keynote` (Purple)
+- `Breakout Sessions` (Light Blue)
+- `General Session` (Gray)
+
+If you use a different track name, it will still show up, but it won't have a fancy background color.
+
+## 🛠️ How do I test & debug locally without an AI agent?
 
 **Problem**: Site not loading or building?
 **Solutions**:

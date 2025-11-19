@@ -4,6 +4,7 @@ speakers:
   - justin-varner
 startTime: "2024-10-26T15:20:00Z"
 endTime: "2024-10-26T16:05:00Z"
+track: "General Session"
 room: "Main Hall"
 eventSlug: "2024"
 featured: false

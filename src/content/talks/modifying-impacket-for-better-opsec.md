@@ -4,6 +4,7 @@ speakers:
   - ryan-odonnell
 startTime: "2024-10-26T19:00:00Z"
 endTime: "2024-10-26T21:35:00Z"
+track: "General Session"
 room: "Main Hall"
 eventSlug: "2024"
 featured: false

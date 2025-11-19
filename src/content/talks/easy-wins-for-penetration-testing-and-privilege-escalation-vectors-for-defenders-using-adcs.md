@@ -4,6 +4,7 @@ speakers:
   - logan-diomedi
 startTime: "2023-10-26T15:00:00Z"
 endTime: "2023-10-26T15:50:00Z"
+track: "General Session"
 room: "Main Hall"
 eventSlug: "2023"
 featured: false

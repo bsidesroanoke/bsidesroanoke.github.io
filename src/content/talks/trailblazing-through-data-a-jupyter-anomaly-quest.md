@@ -4,6 +4,7 @@ speakers:
   - kai-iyer
 startTime: "2024-10-26T18:05:00Z"
 endTime: "2024-10-26T18:50:00Z"
+track: "General Session"
 room: "Second Room"
 eventSlug: "2024"
 featured: false

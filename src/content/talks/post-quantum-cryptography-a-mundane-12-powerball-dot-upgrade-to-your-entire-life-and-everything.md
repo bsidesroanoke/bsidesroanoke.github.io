@@ -4,6 +4,7 @@ speakers:
   - schr0ding3r
 startTime: "2024-10-26T20:50:00Z"
 endTime: "2024-10-26T21:35:00Z"
+track: "General Session"
 room: "Main Hall"
 eventSlug: "2024"
 featured: false

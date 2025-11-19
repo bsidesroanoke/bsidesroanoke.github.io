@@ -5,6 +5,7 @@ speakers:
   - skyler-knecht
 startTime: "2024-10-26T19:55:00Z"
 endTime: "2024-10-26T20:40:00Z"
+track: "General Session"
 room: "Main Hall"
 eventSlug: "2024"
 featured: false

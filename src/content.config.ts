@@ -45,6 +45,7 @@ const talks = defineCollection({
     speakers: z.array(z.string()).optional(),
     abstract: z.string().optional(),
     eventSlug: z.string().optional(),
+    track: z.string().optional(),
     featured: z.boolean().optional(),
   }),
 });

@@ -4,6 +4,7 @@ speakers:
   - logan-diomedi
 startTime: "2024-10-26T17:10:00Z"
 endTime: "2024-10-26T17:55:00Z"
+track: "General Session"
 room: "Main Hall"
 eventSlug: "2024"
 featured: false
