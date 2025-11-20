@@ -1,7 +1,9 @@
 ---
 name: "Larry Whiteside Jr."
-title: "Chief Information Security Officer (CISO), RegScale, Tysons, Va."
-photo: "../../../images/larry.png"
+title: "Chief Information Security Officer (CISO)"
+company: "RegScale"
+location: "Tysons, VA"
+photo: "../../../images/speakers/larry-whiteside-jr.png"
 ---
 Larry Whiteside Jr. is a veteran CISO, CSO, CTO, former USAF Officer, and thought leader in the Cybersecurity field. He has 25+ years experience in building and running cybersecurity programs, holding C Level Security executive roles in multiple industries including DoD, Federal Government, Financial Services, Healthcare, and Critical Infrastructure. 
 

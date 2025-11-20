@@ -25,22 +25,23 @@ const featuredSpeakers = allSpeakers.filter(speaker =>
     <div class="bg-gray-800 rounded-3xl p-8 border border-gray-700">
       <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
         {featuredSpeakers.map(speaker => (
-          <div class="bg-gray-900 rounded-3xl p-6 flex flex-col items-center text-center border border-gray-700 hover:border-accent-blue transition-colors">
-            <div class="w-32 h-32 rounded-full overflow-hidden mb-4 border-2 border-gray-600">
-              {speaker.data.photo ? (
-                <Image src={speaker.data.photo} alt={speaker.data.photoAlt || speaker.data.name} class="w-full h-full object-cover" />
-              ) : (
-                <div class="flex items-center justify-center w-full h-full bg-gray-700 text-gray-400">
-                  {speaker.data.name.split(' ').map((n, index) => (
-                    <span key={index} class="text-3xl font-bold">{n[0]}</span>
-                  ))}
-                </div>
-              )}
+          <a href={`/speakers/${speaker.id.replace(/\.md$/, '')}`} class="block group">
+            <div class="bg-gray-900 rounded-3xl p-6 flex flex-col items-center text-center border border-gray-700 group-hover:border-accent-blue transition-colors h-full">
+              <div class="w-32 h-32 rounded-full overflow-hidden mb-4 border-2 border-gray-600 group-hover:border-accent-blue transition-colors">
+                {speaker.data.photo ? (
+                  <Image src={speaker.data.photo} alt={speaker.data.photoAlt || speaker.data.name} class="w-full h-full object-cover" />
+                ) : (
+                  <div class="flex items-center justify-center w-full h-full bg-gray-700 text-gray-400">
+                    {speaker.data.name.split(' ').map((n, index) => (
+                      <span key={index} class="text-3xl font-bold">{n[0]}</span>
+                    ))}
+                  </div>
+                )}
+              </div>
+              <h3 class="text-xl font-semibold text-white group-hover:text-accent-blue transition-colors">{speaker.data.name}{speaker.data.pronouns && <span class="text-sm font-normal text-gray-400"> ({speaker.data.pronouns})</span>}</h3>
+              <p class="text-sm text-accent-blue font-mono">{speaker.data.company || speaker.data.title || 'Speaker'}</p>
             </div>
-            <h3 class="text-xl font-semibold text-white">{speaker.data.name}{speaker.data.pronouns && <span class="text-sm font-normal text-gray-400"> ({speaker.data.pronouns})</span>}</h3>
-            <p class="text-sm text-accent-blue font-mono">{speaker.data.company || speaker.data.title || 'Speaker'}</p>
-            <p class="text-gray-400 mt-2">{speaker.data.bio || 'Cybersecurity expert'}</p>
-          </div>
+          </a>
         ))}
       </div>
     </div>

@@ -75,6 +75,7 @@ const cleanTitle = (title: string) => title.replace(/\[([^\]]+)\]\([^)]+\)/g, '$
           </a>
         )}
         {data.company && <p class="text-lg text-gray-400">{data.company}</p>}
+        {data.location && <p class="text-lg text-gray-500 mt-1">{data.location}</p>}
         {data.socialLinks && (
             <div class="flex space-x-4 mt-4">
                 {data.socialLinks.map(link => (

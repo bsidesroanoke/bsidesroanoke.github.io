@@ -1,5 +1,5 @@
 ---
 name: "Ben Eldrich"
 title: ""
-photo: "../../../images/BenEldrich.png"
+photo: "../../../images/speakers/ben-eldrich.png"
 ---

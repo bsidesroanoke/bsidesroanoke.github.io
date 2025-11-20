@@ -1,7 +1,9 @@
 ---
 name: "Logan Diomedi"
-title: "Senior Offensive Security Consultant, Depth Security, Kansas City, Mo."
-photo: "../../../images/logan.jpg"
+title: "Senior Offensive Security Consultant"
+company: "Depth Security"
+location: "Kansas City, MO"
+photo: "../../../images/speakers/logan-diomedi.jpg"
 featured:
   - "2023"
 ---

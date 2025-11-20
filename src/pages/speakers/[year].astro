@@ -47,6 +47,7 @@ const sortedSpeakers = eventSpeakers.sort((a, b) => a.data.name.localeCompare(b.
                     {speaker.data.name}{speaker.data.pronouns && <span class="text-lg font-normal text-gray-400"> ({speaker.data.pronouns})</span>}
                   </a>
                 </h2>
+                {speaker.data.location && <p class="text-gray-400 mt-1">{speaker.data.location}</p>}
               </div>
               <div class="md:w-3/4">
                 <div class="prose prose-invert max-w-none" set:html={html} />
