@@ -20,7 +20,7 @@ BSides Roanoke brings the global, community-driven spirit of BSides to the heart
 ### **Organized by Roanoke Infosec Exchange (RISE)**
 
 BSides Roanoke is proudly organized by the [**Roanoke Infosec Exchange
-(RISE)**](https://roanokeinfosec.com/), , a 501(c)(3) nonprofit organization
+(RISE)**](https://roanokeinfosec.com/), a 501(c)(3) nonprofit organization
 dedicated to advancing information security knowledge and practices within our
 community.
 
