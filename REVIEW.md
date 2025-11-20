@@ -58,31 +58,6 @@ While we appreciate feedback on the entire site, please pay **extra attention** 
 
 ---
 
-## 🧪 What to Test
-
-### Navigation
-- [ ] All navigation links work correctly
-
-### Content Display
-- [ ] Event pages load correctly (2023, 2024, 2026)
-- [ ] Speaker profiles display properly with photos and bios
-- [ ] Talk schedules show correct times and rooms
-- [ ] Blog posts render correctly
-- [ ] Venue/Parking information displays properly
-
-### Responsive Design
-- [ ] Site looks good on desktop
-- [ ] All text is readable at different screen sizes
-
-### Functionality
-- [ ] Schedule filtering works (by room, track, search)
-- [ ] Talk modals open and display full descriptions
-- [ ] Links to speaker profiles work from talks
-- [ ] Prior Events page shows past events correctly
-- [ ] Current event (2026) does NOT appear on Prior Events page
-
----
-
 ## 💬 Providing Feedback
 
 Please provide feedback on:
@@ -109,15 +84,17 @@ Please provide feedback on:
 
 ---
 
+## Other Notes
+- IDK how to reasonably test this on mobile I guess I could expose it on my local network and use a mobile device to access it??? Open to feedback on this.
+- If you have any of the missing data for speaker bios, pics, or talks with no abstract, let me know and I'll add it (or feel free to add it yourself)
+- Please don't hesistate to call me out on anything dumb or nitpicky, let's make this the best it can be!
+
 ## 📧 How to Submit Feedback
 
 ### Option 1: Git PR
 - make another branch with your changes
-- create a pull request against the 2026-site-rebuild branch
+- create a pull request against the `2026-site-rebuild` branch
 
 ### Option 2: Discord/Meeting Feedback
 - Provide feedback in our discord channel or in the meeting notes for our next meeting
 
----
-
-Thank you for taking the time to review the site! Your feedback is invaluable in making BSides Roanoke's web presence the best it can be.
