@@ -19,7 +19,10 @@ BSides Roanoke brings the global, community-driven spirit of BSides to the heart
 
 ### **Organized by Roanoke Infosec Exchange (RISE)**
 
-BSides Roanoke is proudly organized by the **Roanoke Infosec Exchange (RISE)**, a 501(c)(3) nonprofit organization dedicated to advancing information security knowledge and practices within our community.
+BSides Roanoke is proudly organized by the [**Roanoke Infosec Exchange
+(RISE)**](https://roanokeinfosec.com/), , a 501(c)(3) nonprofit organization
+dedicated to advancing information security knowledge and practices within our
+community.
 
 The team behind RISE has a long history of serving the local tech scene, running free monthly meetups since 2015 and launching the first BSides Roanoke conference in 2019\. Through the partnership of organizations like MAKE Roanoke, we have been able to build this event into a cornerstone of the local security calendar.
 
