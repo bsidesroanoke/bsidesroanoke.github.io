@@ -54,7 +54,8 @@ import logo from '../assets/b-sides-roanoke.svg';
   </div>
 
   <!-- Mobile Menu -->
-  <nav id="mobile-menu" class="fixed inset-0 bg-gray-900 z-40 transform -translate-x-full transition-transform duration-300 ease-in-out md:hidden flex flex-col items-center justify-center space-y-8">
+  <nav id="mobile-menu" class="fixed inset-0 bg-gray-900 z-40 transform -translate-x-full transition-transform duration-300 ease-in-out md:hidden
+         flex flex-col items-center justify-start overflow-y-auto pt-15 pb-10 space-y-8">
     <a href="/about" class="text-2xl text-gray-200 hover:text-accent-blue transition-colors">About</a>
     <a href="/conduct" class="text-2xl text-gray-200 hover:text-accent-blue transition-colors">Code of Conduct</a>
     <a href={`/venue/${eventSlug}`} class="text-2xl text-gray-200 hover:text-accent-blue transition-colors">Venue/Parking</a>
