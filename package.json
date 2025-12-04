@@ -17,7 +17,7 @@
     "@tailwindcss/typography": "^0.5.16",
     "@types/react": "^19.1.12",
     "@types/react-dom": "^19.1.8",
-    "astro": "^5.13.2",
+    "astro": "^5.16.4",
     "marked": "^17.0.0",
     "nanostores": "^1.0.1",
     "react": "^19.1.1",
