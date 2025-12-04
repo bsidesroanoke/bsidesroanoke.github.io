@@ -1,0 +1,127 @@
+---
+const { title, eventSlug, hasTalks, isPastEvent, latestEventSlug, hasRegistration, hasCfp } = Astro.props;
+import { Image } from 'astro:assets';
+
+import logo from '../assets/b-sides-roanoke.svg';
+
+---
+
+<header class="w-full bg-gray-900 bg-opacity-90 sticky top-0 z-50 backdrop-blur-sm shadow-lg border-b border-gray-700">
+  {isPastEvent && (
+    <div class="bg-yellow-500 text-black p-4 text-center relative z-50">
+      You are viewing information from a previous event. 
+      <a href={`/events/${latestEventSlug}`} class="underline font-bold">
+        Click here to view the latest event data
+      </a>.
+    </div>
+  )}
+  <div class="container mx-auto px-4 py-4 flex items-center justify-between relative z-50">
+    <!-- Logo -->
+    <a href="/" class="flex items-center space-x-2">
+      <Image src={logo} alt="BSides Roanoke Logo" class="h-8 w-auto" />
+      <span class="text-2xl font-bold text-accent-blue">BSides</span>
+      <span class="text-2xl font-bold text-gray-100 glitch-text">Roanoke</span>
+    </a>
+
+    <!-- Desktop Menu -->
+    <nav class="hidden md:flex items-center space-x-6">
+      <a href="/about" class="text-gray-300 hover:text-accent-blue transition-colors">About</a>
+      <a href="/conduct" class="text-gray-300 hover:text-accent-blue transition-colors">Code of Conduct</a>
+      <a href={`/venue/${eventSlug}`} class="text-gray-300 hover:text-accent-blue transition-colors">Venue/Parking</a>
+      {hasTalks ? (
+        <>
+          <a href={`/speakers/${eventSlug}`} class="text-gray-300 hover:text-accent-blue transition-colors">Speakers</a>
+          <a href={`/events/${eventSlug}#schedule`} class="text-gray-300 hover:text-accent-blue transition-colors">Schedule</a>
+        </>
+      ) : (!isPastEvent && hasRegistration && hasCfp && <a href={`/cfp/${eventSlug}`} class="text-gray-300 hover:text-accent-blue transition-colors">Call For Papers</a>)}
+      <a href="/blog" class="text-gray-300 hover:text-accent-blue transition-colors">Blog</a>
+      <a href="/events" class="text-gray-300 hover:text-accent-blue transition-colors">Prior Events</a>
+      {!isPastEvent && (
+        hasRegistration ? (
+          <a href="/#register" class="bg-accent-blue text-gray-900 px-4 py-2 rounded-full font-semibold hover:bg-opacity-90 transition-colors glow-shadow">Register</a>
+        ) : hasCfp ? (
+          <a href={`/cfp/${eventSlug}`} class="bg-accent-blue text-gray-900 px-4 py-2 rounded-full font-semibold hover:bg-opacity-90 transition-colors glow-shadow">Call For Papers</a>
+        ) : null
+      )}
+    </nav>
+
+    <!-- Mobile Menu Toggle -->
+    <button id="mobile-menu-toggle" class="md:hidden p-4 focus:outline-none text-gray-300 hover:text-white z-50" aria-label="Toggle menu">
+      <!-- Hamburger Icon -->
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 hamburger-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+      </svg>
+      <!-- Close Icon -->
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 close-icon hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+    </button>
+  </div>
+
+  <!-- Mobile Menu -->
+  <nav id="mobile-menu" class="fixed inset-0 bg-gray-900 z-40 transform -translate-x-full transition-transform duration-300 ease-in-out md:hidden
+         flex flex-col items-center justify-start overflow-y-auto pt-32 pb-10 space-y-8 h-screen">
+    <a href="/about" class="text-2xl text-gray-200 hover:text-accent-blue transition-colors">About</a>
+    <a href="/conduct" class="text-2xl text-gray-200 hover:text-accent-blue transition-colors">Code of Conduct</a>
+    <a href={`/venue/${eventSlug}`} class="text-2xl text-gray-200 hover:text-accent-blue transition-colors">Venue/Parking</a>
+    {hasTalks ? (
+      <>
+        <a href={`/speakers/${eventSlug}`} class="text-2xl text-gray-200 hover:text-accent-blue transition-colors">Speakers</a>
+        <a href={`/events/${eventSlug}#schedule`} class="text-2xl text-gray-200 hover:text-accent-blue transition-colors">Schedule</a>
+      </>
+    ) : (!isPastEvent && hasRegistration && hasCfp && <a href={`/cfp/${eventSlug}`} class="text-2xl text-gray-200 hover:text-accent-blue transition-colors">Call For Papers</a>)}
+    <a href="/blog" class="text-2xl text-gray-200 hover:text-accent-blue transition-colors">Blog</a>
+    <a href="/events" class="text-2xl text-gray-200 hover:text-accent-blue transition-colors">Prior Events</a>
+    {!isPastEvent && (
+      hasRegistration ? (
+        <a href="/#register" class="text-2xl text-gray-200 hover:text-accent-blue transition-colors bg-accent-blue text-gray-900 px-6 py-2 rounded-full glow-shadow">Register</a>
+      ) : hasCfp ? (
+        <a href={`/cfp/${eventSlug}`} class="text-2xl text-gray-200 hover:text-accent-blue transition-colors bg-accent-blue text-gray-900 px-6 py-2 rounded-full glow-shadow">Call For Papers</a>
+      ) : null
+    )}
+  </nav>
+</header>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const hamburgerIcon = mobileMenuToggle?.querySelector('.hamburger-icon');
+    const closeIcon = mobileMenuToggle?.querySelector('.close-icon');
+
+    function toggleMenu() {
+      if (!mobileMenu || !hamburgerIcon || !closeIcon) return;
+      
+      const isClosed = mobileMenu.classList.contains('-translate-x-full');
+      
+      if (isClosed) {
+        // Open menu
+        mobileMenu.classList.remove('-translate-x-full');
+        hamburgerIcon.classList.add('hidden');
+        closeIcon.classList.remove('hidden');
+        document.body.style.overflow = 'hidden'; // Lock scroll
+      } else {
+        // Close menu
+        mobileMenu.classList.add('-translate-x-full');
+        hamburgerIcon.classList.remove('hidden');
+        closeIcon.classList.add('hidden');
+        document.body.style.overflow = ''; // Unlock scroll
+      }
+    }
+
+    if (mobileMenuToggle && mobileMenu) {
+      mobileMenuToggle.addEventListener('click', toggleMenu);
+
+      // Close the menu if a link is clicked
+      const mobileMenuLinks = mobileMenu.querySelectorAll('a');
+      mobileMenuLinks.forEach(link => {
+        link.addEventListener('click', () => {
+          mobileMenu.classList.add('-translate-x-full');
+          hamburgerIcon?.classList.remove('hidden');
+          closeIcon?.classList.add('hidden');
+          document.body.style.overflow = '';
+        });
+      });
+    }
+  });
+</script>

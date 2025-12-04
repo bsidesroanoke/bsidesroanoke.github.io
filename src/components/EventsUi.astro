@@ -1,0 +1,160 @@
+---
+import FeaturedTalks from './FeaturedTalks.astro';
+import Schedule from './Schedule.astro';
+import FeaturedSpeakers from './FeaturedSpeakers.astro';
+import Markdoc from '@markdoc/markdoc';
+import { getCollection } from 'astro:content';
+
+// Props interface for event data
+export interface Props {
+  event?: {
+    title: string;
+    location: string;
+    date: string;
+    venue_parking?: string;
+    slug?: string;
+  };
+}
+
+const { event } = Astro.props as Props;
+
+// Fetch talks and check if any are associated with the current event
+const allTalks = await getCollection('talks');
+const hasTalksForEvent = event?.slug ? allTalks.some(talk => talk.data.eventSlug === event.slug) : false;
+
+// Get all speakers for the current event
+// Get all speakers for the current event
+const allSpeakers = await getCollection('speakers');
+const eventTalks = allTalks.filter(talk => talk.data.eventSlug === event.slug);
+const speakerSlugs = new Set(eventTalks.flatMap(talk => talk.data.speakers || []));
+const eventSpeakers = allSpeakers.filter(speaker => speakerSlugs.has(speaker.id.replace(/\.md$/, '')));
+
+// Check if there are any featured speakers for the event
+const hasFeaturedSpeakers = allSpeakers.some(speaker => 
+  speaker.data.featured && Array.isArray(speaker.data.featured) && speaker.data.featured.includes(event.slug || '')
+);
+
+// Get all sponsors for the current event
+const allSponsors = await getCollection('sponsors');
+const eventSponsors = allSponsors
+  .filter(sponsor => sponsor.data.years.includes(event.slug))
+  .sort((a, b) => (a.data.rank || 99) - (b.data.rank || 99));
+---
+
+<!-- Event Content Section -->
+<section id="event-content" class="py-4 md:py-6">
+  <div class="container mx-auto px-4">
+    {event?.title && (
+      <h1 class="text-4xl md:text-6xl font-bold text-center mb-8 text-white">
+        {event.title}
+      </h1>
+    )}
+    <div class="bg-gray-800 rounded-3xl p-8 border border-gray-700">
+      <article class="prose prose-invert max-w-none">
+        <slot />
+      </article>
+    </div>
+  </div>
+</section>
+
+{hasFeaturedSpeakers && (
+  <!-- Speakers Section -->
+  <section id="speakers" class="py-4 md:py-6 bg-gray-900">
+    <div class="container mx-auto px-4">
+      <FeaturedSpeakers event={event} />
+    </div>
+  </section>
+)}
+
+{hasTalksForEvent ? (
+  <>
+    <!-- Featured Talks Section -->
+    <section id="featured-talks" class="py-4 md:py-6 bg-gray-900">
+       <div class="container mx-auto px-4">
+         <FeaturedTalks event={event} />
+       </div>
+    </section>
+
+    <!-- Schedule Section -->
+    <section id="schedule" class="py-4 md:py-6">
+      <div class="container mx-auto px-4">
+        <Schedule event={event} />
+      </div>
+    </section>
+  </>
+) : (
+  <!-- CFP Section -->
+  <section id="cfp" class="py-16 md:py-24 text-center">
+    <div class="container mx-auto px-4">
+      <h2 class="text-3xl md:text-5xl font-bold mb-4">The Schedule is Being Finalized!</h2>
+      <p class="text-xl text-gray-400 mb-8">Our Call for Papers is open. Check back soon for the full speaker lineup and schedule.</p>
+      <a href={`/cfp/${event?.slug}`} class="inline-block px-8 py-4 bg-accent-blue text-gray-900 rounded-full font-bold text-lg hover:bg-opacity-80 transition-colors glow-shadow">View Call for Papers</a>
+    </div>
+  </section>
+)}
+
+<!-- Sponsors Section -->
+<section id="sponsors" class="py-4 md:py-6">
+  <div class="container mx-auto px-4">
+    <h2 class="text-3xl md:text-5xl font-bold text-center mb-8">Sponsors</h2>
+    <div class="bg-gray-800 rounded-3xl p-8 border border-gray-700">
+      <div class="text-center">
+        <h3 class="text-2xl font-bold text-white mb-6">Thank You to Our Sponsors</h3>
+        <p class="text-gray-300 mb-8">
+          BSides Roanoke is made possible through the generous support of our sponsors.
+          Interested in sponsoring? Contact us at info@bsidesroanoke.org for sponsorship opportunities.
+        </p>
+        {eventSponsors.length > 0 ? (
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {eventSponsors.map(sponsor => (
+              <a href={sponsor.data.website} target="_blank" rel="noopener noreferrer" class="block">
+                <div class="bg-white rounded-2xl p-6 border border-gray-700 h-full flex items-center justify-center hover:border-accent-blue transition-colors">
+                  {sponsor.data.logo ? (
+                    <img src={sponsor.data.logo} alt={sponsor.data.name} class="max-h-24" />
+                  ) : (
+                    <span class="text-gray-500">{sponsor.data.name}</span>
+                  )}
+                </div>
+              </a>
+            ))}
+          </div>
+        ) : (
+          <p class="text-gray-500">Sponsors for this year will be announced soon!</p>
+        )}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+.container {
+  max-width: 1200px;
+}
+
+.prose {
+  color: white;
+}
+
+.prose h1, .prose h2, .prose h3, .prose h4, .prose h5, .prose h6 {
+  color: white;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+.prose p {
+  color: #d1d5db;
+  line-height: 1.75;
+}
+
+.prose strong {
+  color: white;
+}
+
+.prose ul, .prose ol {
+  color: #d1d5db;
+}
+
+.prose li {
+  margin-bottom: 0.5rem;
+}
+</style>

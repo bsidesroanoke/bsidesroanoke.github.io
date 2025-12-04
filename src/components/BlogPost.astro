@@ -1,0 +1,46 @@
+---
+import { Image } from 'astro:assets';
+
+interface Props {
+  title?: string;
+  description?: string;
+  pubDate?: string;
+  cover?: any;
+  coverAlt?: string;
+  readMoreLink?: string;
+}
+
+const { title, description, pubDate, cover, coverAlt, readMoreLink } = Astro.props as Props;
+---
+
+<div class="bg-gray-900 rounded-3xl p-6 border border-gray-700 hover:border-accent-green transition-colors">
+  <!-- Use the provided cover image if it exists, otherwise use the default fallback -->
+  {cover && (
+    <Image
+      src={cover}
+      alt={coverAlt || `Cover image for ${title}`}
+      class="w-full h-48 object-cover rounded-t-2xl mb-4"
+    />
+  )}
+
+  <h3 class="text-xl font-bold text-white mb-1">{title}</h3>
+  <p class="text-sm text-gray-500 mb-2">{new Date(pubDate || '').toLocaleDateString()}</p>
+
+  {description && (
+    <p class="text-gray-400 mb-4">
+      {description.length > 150 ? `${description.substring(0, 150)}...` : description}
+    </p>
+  )}
+
+  {readMoreLink && (
+    <a href={readMoreLink} class="text-accent-blue font-semibold hover:underline">
+      Read More
+    </a>
+  )}
+</div>
+
+<style>
+img {
+  border-radius: 0.75rem 0.75rem 0 0;
+}
+</style>

@@ -1,0 +1,17 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getEntry } from 'astro:content';
+
+const about = await getEntry('about', 'about');
+const { Content } = await about.render();
+---
+<Layout title="About BSides Roanoke">
+  <section id="about-page" class="container mx-auto px-4 py-16 md:py-24">
+    <div class="max-w-3xl mx-auto">
+      <h1 class="text-4xl md:text-5xl font-bold mb-8 text-center">{about.data.title}</h1>
+      <article class="prose prose-invert max-w-none p-6 md:p-8 text-lg text-gray-300 leading-relaxed space-y-6">
+        <Content />
+      </article>
+    </div>
+  </section>
+</Layout>

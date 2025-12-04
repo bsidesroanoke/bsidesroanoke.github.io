@@ -1,0 +1,49 @@
+---
+import { Image } from 'astro:assets';
+import { getCollection } from 'astro:content';
+
+export interface Props {
+  event?: {
+    slug?: string;
+  };
+}
+
+const { event } = Astro.props as Props;
+
+// Get all speakers
+const allSpeakers = await getCollection('speakers');
+
+// Filter for featured speakers for this event
+const featuredSpeakers = allSpeakers.filter(speaker => 
+  speaker.data.featured && Array.isArray(speaker.data.featured) && speaker.data.featured.includes(event.slug || '')
+);
+---
+
+{featuredSpeakers.length > 0 && (
+  <div>
+    <h2 class="text-3xl md:text-5xl font-bold text-center mb-8">Featured Speakers</h2>
+    <div class="bg-gray-800 rounded-3xl p-8 border border-gray-700">
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+        {featuredSpeakers.map(speaker => (
+          <a href={`/speakers/${speaker.id.replace(/\.md$/, '')}`} class="block group">
+            <div class="bg-gray-900 rounded-3xl p-6 flex flex-col items-center text-center border border-gray-700 group-hover:border-accent-blue transition-colors h-full">
+              <div class="w-32 h-32 rounded-full overflow-hidden mb-4 border-2 border-gray-600 group-hover:border-accent-blue transition-colors">
+                {speaker.data.photo ? (
+                  <Image src={speaker.data.photo} alt={speaker.data.photoAlt || speaker.data.name} class="w-full h-full object-cover" />
+                ) : (
+                  <div class="flex items-center justify-center w-full h-full bg-gray-700 text-gray-400">
+                    {speaker.data.name.split(' ').map((n, index) => (
+                      <span key={index} class="text-3xl font-bold">{n[0]}</span>
+                    ))}
+                  </div>
+                )}
+              </div>
+              <h3 class="text-xl font-semibold text-white group-hover:text-accent-blue transition-colors">{speaker.data.name}{speaker.data.pronouns && <span class="text-sm font-normal text-gray-400"> ({speaker.data.pronouns})</span>}</h3>
+              <p class="text-sm text-accent-blue font-mono">{speaker.data.company || speaker.data.title || 'Speaker'}</p>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </div>
+)}

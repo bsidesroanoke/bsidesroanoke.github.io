@@ -1,0 +1,4 @@
+---
+name: "David Mitchell (digish0)"
+---
+David Mitchell, aka digish0, started his hacking career as a script kiddie running 7th Sphere in mIRC in high school. Later falling in with some Linux/RedHat nerds at a local 2600 group at college while studying CS, etc. He got into Linux, started an IT career, later rediscovering his hacking script kiddie roots when a local hacker space opened up and shared members with a lockpicking group that worked in infosec as penetration testers, etc where he discovered he could get paid to do the things he liked doing in high school/college. He now works professionally as a red team member and cyber security researcher at a large financial institution. You can catch him attending and speaking at many conferences like CackalackyCon and BSides, DefCon.The rest of the time he spends being a dad/husband, trying not to get injured in Muay Thai/BJJ or mountain biking, and listening to either very expensive or very cheap vinyl.

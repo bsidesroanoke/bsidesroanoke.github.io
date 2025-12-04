@@ -1,0 +1,38 @@
+---
+import EventsUi from '../../components/EventsUi.astro';
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import Markdoc from '@markdoc/markdoc';
+
+
+// Get all events to generate dynamic routes
+export async function getStaticPaths() {
+  const events = await getCollection('events');
+  return events.map((event) => ({
+    params: {
+      slug: event.id.replace('.md', ''), // Use filename as slug
+    },
+    props: { event }, // Pass the full event object to the page
+   }));
+}
+
+const { event } = Astro.props;
+const slug = event.id.replace('.md', '');
+
+// Redirect to home if this is the latest event
+const allEvents = await getCollection('events');
+const latestEvent = allEvents.sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime())[0];
+if (latestEvent.id === event.id) {
+  return Astro.redirect('/');
+}
+
+const eventData = { ...event.data, slug };
+const renderedContent = Markdoc.renderers.html(Markdoc.transform(Markdoc.parse(event.body || '')));
+export const prerender = true;
+---
+
+<Layout title={eventData.title} eventSlug={slug}>
+  <EventsUi event={eventData}>
+    <Fragment set:html={renderedContent} />
+  </EventsUi>
+</Layout>

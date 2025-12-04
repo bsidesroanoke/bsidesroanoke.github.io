@@ -1,0 +1,49 @@
+---
+import { Image } from 'astro:assets';
+
+interface Props {
+  title: string;
+  description?: string;
+  heroImage?: any;
+}
+
+const { title, description, heroImage } = Astro.props as Props;
+---
+
+<!-- Hero Section -->
+  <header id="blog-header" class="w-full py-20 md:py-32 flex items-center justify-center text-center relative overflow-hidden bg-gray-800">
+    {heroImage && (
+      <Image
+        src={heroImage}
+        alt={`Cover image for ${title}`}
+        class="absolute inset-0 w-full h-full object-cover opacity-30"
+      />
+    )}
+    <div class="relative z-10 p-6 md:p-12 bg-gray-900 bg-opacity-70 rounded-3xl">
+      <h1 class="text-4xl md:text-6xl font-extrabold text-white mb-4">{title}</h1>
+      {description && <p class="text-xl md:text-2xl text-gray-300 mb-8 whitespace-pre-line">{description}</p>}
+    </div>
+  </header>
+
+<!-- Blog Content Section -->
+<section id="blog-content" class="container mx-auto px-4 py-4 md:py-6">
+  <article class="max-w-3xl mx-auto prose-invert">
+    <slot />
+  </article>
+</section>
+
+<style>
+.prose-invert {
+  color: #e0e0e0;
+}
+.prose-invert h1, .prose-invert h2, .prose-invert h3, .prose-invert h4, .prose-invert h5, .prose-invert h6 {
+  font-family: 'Inter', sans-serif;
+  color: #ffffff;
+}
+.prose-invert p, .prose-invert li {
+  color: #e0e0e0;
+}
+.prose-invert a {
+  color: #2a9dff;
+}
+</style>

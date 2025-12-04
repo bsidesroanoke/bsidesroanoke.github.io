@@ -1,0 +1,13 @@
+---
+import Layout from '../layouts/Layout.astro';
+import BlogList from '../components/BlogList.astro';
+---
+
+<Layout title="Blog">
+  <!-- Blog Section -->
+  <section id="blog" class="container mx-auto px-4 py-16 md:py-24">
+    <h1 class="text-4xl font-extrabold text-white mb-8 text-center">Blog</h1>
+
+    <BlogList showCount={undefined} />
+  </section>
+</Layout>

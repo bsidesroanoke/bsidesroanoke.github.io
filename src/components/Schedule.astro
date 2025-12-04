@@ -1,0 +1,98 @@
+---
+import { getCollection } from 'astro:content';
+import ImprovedSchedule from '../components/ImprovedSchedule/ImprovedSchedule.tsx';
+
+export interface Props {
+  event?: {
+    slug?: string;
+    date?: string;
+  };
+}
+
+const { event } = Astro.props as Props;
+
+// Get all speakers and create a map of slug to name and pronouns
+const allSpeakers = await getCollection('speakers');
+const speakerMap = new Map();
+const pronounsMap = new Map();
+for (const speaker of allSpeakers) {
+  if (speaker && speaker.id) {
+    const slug = speaker.id.replace(/\.md$/, '');
+    speakerMap.set(slug, speaker.data.name);
+    pronounsMap.set(slug, speaker.data.pronouns);
+  }
+}
+
+// Get all talks and sort by startTime
+const allTalks = await getCollection('talks');
+console.log('Schedule Debug - All talks:', allTalks.map(t => ({
+  id: t.id,
+  eventSlug: t.data.eventSlug,
+  featured: t.data.featured,
+  title: t.data.title
+})));
+console.log('Schedule Debug - Talks collection length:', allTalks.length);
+console.log('Schedule Debug - Current event slug:', event?.slug);
+
+// Filter talks by event if event is provided
+let talks = allTalks;
+if (event?.slug) {
+  talks = allTalks.filter(talk => talk.data.eventSlug === event.slug);
+  console.log('Schedule Debug - Filtered talks for event:', event.slug, talks.map(t => ({
+    id: t.id,
+    eventSlug: t.data.eventSlug,
+    title: t.data.title
+  })));
+}
+
+// Sort talks by time
+talks.sort((a, b) => new Date(a.data.startTime || a.data.timeSlotStart || a.data.date as string).getTime() - new Date(b.data.startTime || b.data.timeSlotStart || b.data.date as string).getTime());
+
+// Extract time slots
+function getTimeSlot(talk: any) {
+  // Try new structured fields first, fall back to legacy fields
+  const start = talk.data.startTime || talk.data.timeSlotStart;
+  const end = talk.data.endTime || talk.data.timeSlotEnd;
+  return { start, end };
+}
+
+// Format time slot
+function formatTimeSlot(start: string | undefined, end: string | undefined) {
+  if (!start || !end) return '';
+  const startTime = new Date(start).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+  const endTime = new Date(end).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+  return `${startTime} - ${endTime}`;
+}
+---
+
+<div class="container mx-auto px-4">
+  <h2 class="text-3xl md:text-5xl font-bold text-center mb-8">Event Schedule</h2>
+  {talks.length > 0 ? (
+    <ImprovedSchedule client:load talks={talks.map(talk => ({
+      id: talk.id,
+      slug: talk.id.replace(/\.md$/, ''), // Create slug from filename
+      title: talk.data.title,
+      speaker: Array.isArray(talk.data.speakers)
+        ? talk.data.speakers.map(slug => ({
+            name: speakerMap.get(slug) || slug,
+            slug: slug,
+            pronouns: pronounsMap.get(slug)
+          }))
+        : [],
+      startTime: talk.data.startTime,
+      endTime: talk.data.endTime,
+      time: formatTimeSlot(talk.data.startTime, talk.data.endTime),
+      room: talk.data.room,
+      track: talk.data.track || 'General Session',
+      abstract: talk.body || talk.data.abstract || '' // Use body as abstract, fallback to frontmatter
+    }))} eventDate={event?.date || 'Unknown date'} eventSlug={event?.slug} />
+  ) : (
+    <p class="text-center text-gray-400">No talks available for this event.</p>
+  )}
+</div>
+
+<style>
+.container {
+  max-width: 1200px;
+}
+</style>

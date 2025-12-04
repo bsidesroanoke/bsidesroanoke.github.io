@@ -1,0 +1,160 @@
+
+> bsides-astro@0.0.1 build
+> astro build --inspect
+
+21:49:45 [content] Syncing content
+21:49:45 [content] Synced content
+21:49:45 [types] Generated 168ms
+21:49:45 [build] output: "static"
+21:49:45 [build] mode: "static"
+21:49:45 [build] directory: /Users/aaronmcphall/src/bsides_roa_build/bsides-astro/dist/
+21:49:45 [build] Collecting build info...
+21:49:45 [build] ✓ Completed in 195ms.
+21:49:45 [build] Building static entrypoints...
+21:49:46 [vite] ✓ built in 749ms
+21:49:46 [build] ✓ Completed in 769ms.
+
+ building client (vite) 
+21:49:46 [vite] transforming...
+21:49:46 [vite] ✓ 1 modules transformed.
+21:49:46 [vite] rendering chunks...
+21:49:46 [vite] ✓ built in 5ms
+
+ generating static routes 
+21:49:46 ▶ src/pages/blog.astro
+21:49:46   └─ /blog/index.html (+7ms) 
+21:49:46 ▶ src/pages/blog/[...slug].astro
+Available blog posts:
+21:49:46   ├─ /blog/2023-10-post-1/index.html (+1ms) 
+21:49:46   ├─ /blog/2024-09-post-2/index.html (+1ms) 
+21:49:46   └─ /blog/2023-10-post-3/index.html (+1ms) 
+21:49:46 ▶ src/pages/conduct.astro
+21:49:46   └─ /conduct/index.html (+1ms) 
+21:49:46 ▶ src/pages/events.astro
+21:49:46   └─ /events/index.html (+1ms) 
+21:49:46 ▶ src/pages/events/[...slug].astro
+21:49:46   ├─ /events/2024/index.htmlFeaturedTalks Debug - All talks: [
+  {
+    id: 'keynote-2025',
+    eventSlug: '2025',
+    featured: true,
+    title: 'The Future of AI in Threat Detection'
+  }
+]
+FeaturedTalks Debug - Talks collection length: 1
+FeaturedTalks Debug - Current event slug: 2024
+FeaturedTalks Debug - Filtered talks: []
+FeaturedTalks Debug - Featured talks length: 0
+ImprovedSchedule Debug - All talks: [
+  {
+    id: 'keynote-2025',
+    eventSlug: '2025',
+    room: 'Main Hall',
+    title: 'The Future of AI in Threat Detection'
+  }
+]
+ImprovedSchedule Debug - Talks collection length: 1
+ImprovedSchedule Debug - Current event slug: 2024
+ImprovedSchedule Debug - Filtered talks for event: 2024 []
+ (+6ms) 
+21:49:46   ├─ /events/2025/index.htmlFeaturedTalks Debug - All talks: [
+  {
+    id: 'keynote-2025',
+    eventSlug: '2025',
+    featured: true,
+    title: 'The Future of AI in Threat Detection'
+  }
+]
+FeaturedTalks Debug - Talks collection length: 1
+FeaturedTalks Debug - Current event slug: 2025
+FeaturedTalks Debug - Filtered talks: [
+  {
+    id: 'keynote-2025',
+    eventSlug: '2025',
+    featured: true,
+    title: 'The Future of AI in Threat Detection'
+  }
+]
+FeaturedTalks Debug - Featured talks length: 1
+ImprovedSchedule Debug - All talks: [
+  {
+    id: 'keynote-2025',
+    eventSlug: '2025',
+    room: 'Main Hall',
+    title: 'The Future of AI in Threat Detection'
+  }
+]
+ImprovedSchedule Debug - Talks collection length: 1
+ImprovedSchedule Debug - Current event slug: 2025
+ImprovedSchedule Debug - Filtered talks for event: 2025 [
+  {
+    id: 'keynote-2025',
+    eventSlug: '2025',
+    room: 'Main Hall',
+    title: 'The Future of AI in Threat Detection'
+  }
+]
+ (+4ms) 
+21:49:46   └─ /events/2026/index.htmlFeaturedTalks Debug - All talks: [
+  {
+    id: 'keynote-2025',
+    eventSlug: '2025',
+    featured: true,
+    title: 'The Future of AI in Threat Detection'
+  }
+]
+FeaturedTalks Debug - Talks collection length: 1
+FeaturedTalks Debug - Current event slug: 2026
+FeaturedTalks Debug - Filtered talks: []
+FeaturedTalks Debug - Featured talks length: 0
+ImprovedSchedule Debug - All talks: [
+  {
+    id: 'keynote-2025',
+    eventSlug: '2025',
+    room: 'Main Hall',
+    title: 'The Future of AI in Threat Detection'
+  }
+]
+ImprovedSchedule Debug - Talks collection length: 1
+ImprovedSchedule Debug - Current event slug: 2026
+ImprovedSchedule Debug - Filtered talks for event: 2026 []
+ (+3ms) 
+21:49:46 ▶ src/pages/speakers.astro
+21:49:46   └─ /speakers/index.html (+1ms) 
+21:49:46 ▶ src/pages/talks.astro
+21:49:46   └─ /talks/index.html (+1ms) 
+21:49:46 ▶ src/pages/talks/[...slug].astro
+21:49:46   └─ /talks/keynote-2025/index.html (+1ms) 
+21:49:46 ▶ src/pages/index.astro
+21:49:46   └─ /index.htmlFeaturedTalks Debug - All talks: [
+  {
+    id: 'keynote-2025',
+    eventSlug: '2025',
+    featured: true,
+    title: 'The Future of AI in Threat Detection'
+  }
+]
+FeaturedTalks Debug - Talks collection length: 1
+FeaturedTalks Debug - Current event slug: 2026
+FeaturedTalks Debug - Filtered talks: []
+FeaturedTalks Debug - Featured talks length: 0
+ImprovedSchedule Debug - All talks: [
+  {
+    id: 'keynote-2025',
+    eventSlug: '2025',
+    room: 'Main Hall',
+    title: 'The Future of AI in Threat Detection'
+  }
+]
+ImprovedSchedule Debug - Talks collection length: 1
+ImprovedSchedule Debug - Current event slug: 2026
+ImprovedSchedule Debug - Filtered talks for event: 2026 []
+ (+3ms) 
+21:49:46 ✓ Completed in 43ms.
+
+ generating optimized images 
+21:49:46   ▶ /_astro/b-sides-roanoke.Coc7rjaL_Z1WMeNX.svg (reused cache entry) (+1ms) (1/1)
+21:49:46 ✓ Completed in 1ms.
+
+21:49:46 [build] 13 page(s) built in 1.02s
+21:49:46 [build] Complete!

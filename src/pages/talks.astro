@@ -1,0 +1,15 @@
+---
+import { getCollection } from 'astro:content';
+
+// Get all events and find the latest one by date.
+const events = await getCollection('events');
+const latestEvent = events.sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime())[0];
+
+// If a latest event is found, redirect to its talks page.
+if (latestEvent) {
+  return Astro.redirect(`/talks/${latestEvent.slug}`);
+}
+
+// If no events are found, return a 404 response.
+return new Response('No events found', { status: 404 });
+---
