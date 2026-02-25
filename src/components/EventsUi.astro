@@ -39,6 +39,38 @@ const allSponsors = await getCollection('sponsors');
 const eventSponsors = allSponsors
   .filter(sponsor => sponsor.data.years.includes(event.slug))
   .sort((a, b) => (a.data.rank || 99) - (b.data.rank || 99));
+
+const hasTiers = eventSponsors.some(sponsor => 
+  event?.slug && sponsor.data.tiers && sponsor.data.tiers[event.slug]
+);
+
+const tiersOrder = ['Gold', 'Silver', 'Bronze', 'Community', 'Partner'];
+const tierStyles: Record<string, { border: string; text: string }> = {
+  Gold: { border: 'border-yellow-500', text: 'text-yellow-500' },
+  Silver: { border: 'border-gray-400', text: 'text-gray-400' },
+  Bronze: { border: 'border-orange-500', text: 'text-orange-500' },
+  Community: { border: 'border-green-500', text: 'text-green-500' },
+  Partner: { border: 'border-purple-500', text: 'text-purple-500' }
+};
+
+const groupedSponsors = eventSponsors.reduce((acc, sponsor) => {
+  let tier = 'Untiered';
+  if (event?.slug && sponsor.data.tiers && sponsor.data.tiers[event.slug]) {
+    tier = sponsor.data.tiers[event.slug];
+  }
+  
+  if (!acc[tier]) acc[tier] = [];
+  acc[tier].push(sponsor);
+  return acc;
+}, {} as Record<string, typeof eventSponsors>);
+
+const activeTiers = Object.keys(groupedSponsors)
+  .filter(t => t !== 'Untiered')
+  .sort((a, b) => {
+    const indexA = tiersOrder.indexOf(a);
+    const indexB = tiersOrder.indexOf(b);
+    return (indexA === -1 ? 99 : indexA) - (indexB === -1 ? 99 : indexB);
+  });
 ---
 
 <!-- Event Content Section -->
@@ -105,19 +137,64 @@ const eventSponsors = allSponsors
           Interested in sponsoring? Contact us at info@bsidesroanoke.org for sponsorship opportunities.
         </p>
         {eventSponsors.length > 0 ? (
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {eventSponsors.map(sponsor => (
-              <a href={sponsor.data.website} target="_blank" rel="noopener noreferrer" class="block">
-                <div class="bg-white rounded-2xl p-6 border border-gray-700 h-full flex items-center justify-center hover:border-accent-blue transition-colors">
-                  {sponsor.data.logo ? (
-                    <img src={sponsor.data.logo} alt={sponsor.data.name} class="max-h-24" />
-                  ) : (
-                    <span class="text-gray-500">{sponsor.data.name}</span>
-                  )}
+          hasTiers ? (
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 text-left">
+              {activeTiers.map(tier => {
+                const style = tierStyles[tier] || { border: 'border-gray-600', text: 'text-gray-300' };
+                return (
+                  <div class={`bg-gray-900 rounded-2xl p-6 border ${style.border}`}>
+                    <h4 class={`text-xl font-bold mb-4 text-center ${style.text}`}>{tier}</h4>
+                    <div class="space-y-4">
+                      {groupedSponsors[tier].map(sponsor => (
+                        <a href={sponsor.data.website} target="_blank" rel="noopener noreferrer" class="block">
+                          <div class="bg-white rounded-lg p-4 flex items-center justify-center hover:opacity-80 transition-opacity min-h-[100px]">
+                            {sponsor.data.logo ? (
+                              <img src={sponsor.data.logo} alt={sponsor.data.name} class="max-h-20" />
+                            ) : (
+                              <span class="text-gray-900 font-bold text-center">{sponsor.data.name}</span>
+                            )}
+                          </div>
+                        </a>
+                      ))}
+                    </div>
+                  </div>
+                );
+              })}
+              
+              {groupedSponsors['Untiered'] && groupedSponsors['Untiered'].length > 0 && (
+                <div class="bg-gray-900 rounded-2xl p-6 border border-gray-600 md:col-span-2 lg:col-span-3 mt-4">
+                  <h4 class="text-xl font-bold text-gray-300 mb-4 text-center">Other Sponsors</h4>
+                  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {groupedSponsors['Untiered'].map(sponsor => (
+                      <a href={sponsor.data.website} target="_blank" rel="noopener noreferrer" class="block h-full">
+                        <div class="bg-white rounded-xl p-4 border border-gray-700 h-full flex items-center justify-center hover:border-accent-blue transition-colors min-h-[100px]">
+                          {sponsor.data.logo ? (
+                            <img src={sponsor.data.logo} alt={sponsor.data.name} class="max-h-20" />
+                          ) : (
+                            <span class="text-gray-900 font-bold text-center">{sponsor.data.name}</span>
+                          )}
+                        </div>
+                      </a>
+                    ))}
+                  </div>
                 </div>
-              </a>
-            ))}
-          </div>
+              )}
+            </div>
+          ) : (
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {eventSponsors.map(sponsor => (
+                <a href={sponsor.data.website} target="_blank" rel="noopener noreferrer" class="block">
+                  <div class="bg-white rounded-2xl p-6 border border-gray-700 h-full flex items-center justify-center hover:border-accent-blue transition-colors">
+                    {sponsor.data.logo ? (
+                      <img src={sponsor.data.logo} alt={sponsor.data.name} class="max-h-24" />
+                    ) : (
+                      <span class="text-gray-500">{sponsor.data.name}</span>
+                    )}
+                  </div>
+                </a>
+              ))}
+            </div>
+          )
         ) : (
           <p class="text-gray-500">Sponsors for this year will be announced soon!</p>
         )}

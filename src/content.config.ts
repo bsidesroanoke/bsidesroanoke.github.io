@@ -75,6 +75,7 @@ const sponsors = defineCollection({
     website: z.string().url().optional(),
     years: z.array(z.string()),
     rank: z.number().optional(),
+    tiers: z.record(z.string()).optional(), // Map of year slug -> tier string
   }),
 });
 

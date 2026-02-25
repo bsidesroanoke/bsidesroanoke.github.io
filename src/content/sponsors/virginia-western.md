@@ -2,6 +2,8 @@
 name: Virginia Western Community College
 logo: ../../../images/virginia_western_logo.jpeg
 website: https://www.virginiawestern.edu
-years: ["2023", "2024"]
+years: ["2023", "2024", "2026"]
 rank: 99
+tiers:
+  "2026": Partner
 ---
