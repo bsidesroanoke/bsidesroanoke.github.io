@@ -4,6 +4,7 @@ import Schedule from './Schedule.astro';
 import FeaturedSpeakers from './FeaturedSpeakers.astro';
 import Markdoc from '@markdoc/markdoc';
 import { getCollection } from 'astro:content';
+import { Image } from 'astro:assets';
 
 // Props interface for event data
 export interface Props {
@@ -149,7 +150,7 @@ const activeTiers = Object.keys(groupedSponsors)
                         <a href={sponsor.data.website} target="_blank" rel="noopener noreferrer" class="block">
                           <div class="bg-white rounded-lg p-4 flex items-center justify-center hover:opacity-80 transition-opacity min-h-[100px]">
                             {sponsor.data.logo ? (
-                              <img src={sponsor.data.logo} alt={sponsor.data.name} class="max-h-20" />
+                              <Image src={sponsor.data.logo} alt={sponsor.data.logoAlt || sponsor.data.name} class="max-h-20 w-auto object-contain" />
                             ) : (
                               <span class="text-gray-900 font-bold text-center">{sponsor.data.name}</span>
                             )}
@@ -169,7 +170,7 @@ const activeTiers = Object.keys(groupedSponsors)
                       <a href={sponsor.data.website} target="_blank" rel="noopener noreferrer" class="block h-full">
                         <div class="bg-white rounded-xl p-4 border border-gray-700 h-full flex items-center justify-center hover:border-accent-blue transition-colors min-h-[100px]">
                           {sponsor.data.logo ? (
-                            <img src={sponsor.data.logo} alt={sponsor.data.name} class="max-h-20" />
+                            <Image src={sponsor.data.logo} alt={sponsor.data.logoAlt || sponsor.data.name} class="max-h-20 w-auto object-contain" />
                           ) : (
                             <span class="text-gray-900 font-bold text-center">{sponsor.data.name}</span>
                           )}
@@ -186,7 +187,7 @@ const activeTiers = Object.keys(groupedSponsors)
                 <a href={sponsor.data.website} target="_blank" rel="noopener noreferrer" class="block">
                   <div class="bg-white rounded-2xl p-6 border border-gray-700 h-full flex items-center justify-center hover:border-accent-blue transition-colors">
                     {sponsor.data.logo ? (
-                      <img src={sponsor.data.logo} alt={sponsor.data.name} class="max-h-24" />
+                      <Image src={sponsor.data.logo} alt={sponsor.data.logoAlt || sponsor.data.name} class="max-h-24 w-auto object-contain" />
                     ) : (
                       <span class="text-gray-500">{sponsor.data.name}</span>
                     )}
