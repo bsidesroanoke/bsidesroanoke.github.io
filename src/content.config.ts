@@ -69,12 +69,14 @@ const speakers = defineCollection({
 // Define the sponsors collection
 const sponsors = defineCollection({
   loader: glob({ pattern: ['**/*.md'], base: './src/content/sponsors' }),
-  schema: z.object({
+  schema: ({ image }) => z.object({
     name: z.string(),
-    logo: z.string().optional(),
+    logo: image().optional(),
+    logoAlt: z.string().optional(),
     website: z.string().url().optional(),
     years: z.array(z.string()),
     rank: z.number().optional(),
+    tiers: z.record(z.string()).optional(), // Map of year slug -> tier string
   }),
 });
 

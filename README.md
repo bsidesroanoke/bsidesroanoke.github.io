@@ -121,10 +121,12 @@ In today's digital landscape, web security is more critical than ever. Let's exp
 | Field | Type | Required | Description |
 |-------|------|----------|-------------|
 | `name` | string | Yes | Sponsor name |
-| `logo` | string | No | Path to logo image |
+| `logo` | image | No | Path to logo image |
+| `logoAlt` | string | No | Alt text for logo |
 | `website` | url | No | Link to sponsor website |
 | `years` | array<string> | Yes | List of event slugs sponsored |
 | `rank` | number | No | Sorting order (lower is higher priority) |
+| `tiers` | object | No | Map of event slugs to tier names (e.g., `{"2024": "Gold"}`) |
 
 ### Blogs (`src/content/blogs/`)
 | Field | Type | Required | Description |
