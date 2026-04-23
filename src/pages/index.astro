@@ -22,7 +22,16 @@ if (latestEvent.data.register) {
 }
 let cfpButton = null;
 const latestCfp = cfps.find(cfp => cfp.id.replace('.md', '') === latestEventSlug);
-if (latestCfp) {
+
+let isCfpOpen = true;
+if (latestCfp?.data?.closeDate) {
+  const closingDate = new Date(latestCfp.data.closeDate);
+  closingDate.setDate(closingDate.getDate() + 1);
+  const now = new Date();
+  isCfpOpen = now < closingDate;
+}
+
+if (latestCfp && isCfpOpen) {
   cfpButton = { text: 'Call for Papers', href: `/cfp/${latestEventSlug}` };
 }
 

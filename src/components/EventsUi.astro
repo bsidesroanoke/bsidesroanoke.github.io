@@ -22,6 +22,19 @@ const { event } = Astro.props as Props;
 // Fetch talks and check if any are associated with the current event
 const allTalks = await getCollection('talks');
 const hasTalksForEvent = event?.slug ? allTalks.some(talk => talk.data.eventSlug === event.slug) : false;
+const hasScheduledTalks = event?.slug ? allTalks.some(talk => talk.data.eventSlug === event.slug && talk.data.startTime) : false;
+
+// Check if CFP is open
+const allCfps = await getCollection('cfp');
+const eventCfp = allCfps.find(c => c.id === event?.slug || c.id === `${event?.slug}.md` || c.slug === event?.slug);
+let isCfpOpen = true; // default to open if we don't have a closeDate
+if (eventCfp?.data?.closeDate) {
+  const closingDate = new Date(eventCfp.data.closeDate);
+  // Add one day so it closes at the end of the closeDate
+  closingDate.setDate(closingDate.getDate() + 1);
+  const now = new Date();
+  isCfpOpen = now < closingDate;
+}
 
 // Get all speakers for the current event
 // Get all speakers for the current event
@@ -99,29 +112,31 @@ const activeTiers = Object.keys(groupedSponsors)
   </section>
 )}
 
-{hasTalksForEvent ? (
-  <>
-    <!-- Featured Talks Section -->
-    <section id="featured-talks" class="py-4 md:py-6 bg-gray-900">
-       <div class="container mx-auto px-4">
-         <FeaturedTalks event={event} />
-       </div>
-    </section>
+{hasTalksForEvent && (
+  <!-- Featured Talks Section -->
+  <section id="featured-talks" class="py-4 md:py-6 bg-gray-900">
+     <div class="container mx-auto px-4">
+       <FeaturedTalks event={event} />
+     </div>
+  </section>
+)}
 
-    <!-- Schedule Section -->
-    <section id="schedule" class="py-4 md:py-6">
-      <div class="container mx-auto px-4">
-        <Schedule event={event} />
-      </div>
-    </section>
-  </>
+{hasScheduledTalks ? (
+  <!-- Schedule Section -->
+  <section id="schedule" class="py-4 md:py-6">
+    <div class="container mx-auto px-4">
+      <Schedule event={event} />
+    </div>
+  </section>
 ) : (
   <!-- CFP Section -->
   <section id="cfp" class="py-16 md:py-24 text-center">
     <div class="container mx-auto px-4">
       <h2 class="text-3xl md:text-5xl font-bold mb-4">The Schedule is Being Finalized!</h2>
-      <p class="text-xl text-gray-400 mb-8">Our Call for Papers is open. Check back soon for the full speaker lineup and schedule.</p>
-      <a href={`/cfp/${event?.slug}`} class="inline-block px-8 py-4 bg-accent-blue text-gray-900 rounded-full font-bold text-lg hover:bg-opacity-80 transition-colors glow-shadow">View Call for Papers</a>
+      <p class="text-xl text-gray-400 mb-8">Check back soon for the full speaker lineup and schedule.</p>
+      {isCfpOpen && (
+        <a href={`/cfp/${event?.slug}`} class="inline-block px-8 py-4 bg-accent-blue text-gray-900 rounded-full font-bold text-lg hover:bg-opacity-80 transition-colors glow-shadow">View Call for Papers</a>
+      )}
     </div>
   </section>
 )}

@@ -23,6 +23,7 @@ const isPastEvent = pageEventSlug && pageEventSlug !== latestEventSlug;
 // Check if the event for the header has talks
 const allTalks = await getCollection('talks');
 const hasTalksForEvent = allTalks.some(talk => talk.data.eventSlug === eventSlugForHeader);
+const hasScheduledTalks = allTalks.some(talk => talk.data.eventSlug === eventSlugForHeader && talk.data.startTime);
 
 // Check if there's a CFP for the current event
 const allCfps = await getCollection('cfp');
@@ -42,7 +43,7 @@ const hasRegistration = currentEvent?.data.register ? true : false;
 		<title>BSides Roanoke - {title}</title>
 	</head>
 	<body class="bg-gray-900 text-gray-100 font-sans">
-		<Header title={title} eventSlug={eventSlugForHeader} hasTalks={hasTalksForEvent} isPastEvent={isPastEvent} latestEventSlug={latestEventSlug} hasRegistration={hasRegistration} hasCfp={hasCfp} />
+		<Header title={title} eventSlug={eventSlugForHeader} hasTalks={hasTalksForEvent} hasScheduledTalks={hasScheduledTalks} isPastEvent={isPastEvent} latestEventSlug={latestEventSlug} hasRegistration={hasRegistration} hasCfp={hasCfp} />
 		<slot />
 		<Footer />
 	</body>
