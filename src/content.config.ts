@@ -41,7 +41,7 @@ const talks = defineCollection({
     endTime: z.string().datetime().optional(),
     timeSlot: z.string().optional(),
     timeSlotStart: z.string().optional(),
-    room: z.string(),
+    room: z.string().optional(),
     speakers: z.array(z.string()).optional(),
     abstract: z.string().optional(),
     eventSlug: z.string().optional(),
