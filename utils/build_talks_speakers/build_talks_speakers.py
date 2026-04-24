@@ -1,4 +1,4 @@
-CSV_FILE_PATH = ""
+CSV_FILE_PATH = '/Users/lizz/Downloads/BSides Roanoke CFP 2026 (Responses) - Talk Details (1).csv'
 
 import csv
 
@@ -14,8 +14,9 @@ with open(CSV_FILE_PATH, 'r') as file:
             speaker_content += f"title: {row.get('Title', '')}\n"
             speaker_content += f"company: {row.get('Company', '')}\n"
             speaker_content += f"location: {row.get('Location', '')}\n"
-            speaker_content += f"photo: ../../../images/{speaker_slug}.jpg\n"
-            speaker_content += f"pronouns: {row.get('Pronouns', '')}\n"
+            speaker_content += f"photo: ../../../images/speakers/{speaker_slug}.jpg\n"
+            if row.get('Pronouns', '') != '':
+                speaker_content += f"pronouns: {row.get('Pronouns', '')}\n"
             speaker_content += f"website: {row.get('Website', '')}\n"
             speaker_content += "---\n"
             speaker_content += row.get('Bio', '')
@@ -24,7 +25,7 @@ with open(CSV_FILE_PATH, 'r') as file:
             print(f"Created speaker file: {talk_slug}.md")
             talk_content = "---\n"
             talk_content += f"title: {row.get('Title', '')}\n"
-            talk_content += f"speakers: \n\t - {row.get('Name', '')}\n"
+            talk_content += f"speakers: \n - {speaker_slug}\n"
             talk_content += "eventSlug: \"2026\"\n"
             talk_content += "featured: false\n"
             talk_content += "---\n"
