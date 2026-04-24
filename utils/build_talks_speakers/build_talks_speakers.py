@@ -22,7 +22,7 @@ with open(CSV_FILE_PATH, 'r') as file:
             speaker_content += row.get('Bio', '')
             with open(f"src/content/speakers/{speaker_slug}.md", 'w') as speaker_file:
                 speaker_file.write(speaker_content)
-            print(f"Created speaker file: {talk_slug}.md")
+            print(f"Created speaker file: {speaker_slug}.md")
             talk_content = "---\n"
             talk_content += f"title: {row.get('Title', '')}\n"
             talk_content += f"speakers: \n - {speaker_slug}\n"
