@@ -11,17 +11,12 @@ This session explores the emergence of agentic AI security platforms capable of 
 
 Rather than theoretical AI discussions, this talk focuses on operational architecture and real-world design patterns, including:
 
-The OODA loop as the foundation for autonomous cyber operations
-
-Designing event-driven security flows that trigger investigation and remediation
-
-Building offensive testing agents that continuously validate your security posture
-
-Defensive AI that shifts from alerting to action
-
-Dynamic autonomy models where guardrails adjust based on risk conditions (think cyber DEFCON)
-
-Human-AI collaboration — when to trust automation and when to intervene
+* The OODA loop as the foundation for autonomous cyber operations
+* Designing event-driven security flows that trigger investigation and remediation
+* Building offensive testing agents that continuously validate your security posture
+* Defensive AI that shifts from alerting to action
+* Dynamic autonomy models where guardrails adjust based on risk conditions (think cyber DEFCON)
+* Human-AI collaboration — when to trust automation and when to intervene
 
 Attendees will leave with a clear blueprint for transitioning from reactive SOC models to self-driving security operations, along with a practical understanding of the risks, governance requirements, and strategic advantages of agentic AI.
 
