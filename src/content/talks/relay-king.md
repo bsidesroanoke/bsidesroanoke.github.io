@@ -1,7 +1,7 @@
 ---
 title: Introducing RelayKing - Relay Your Way to Royalty
 speakers: 
-	 - Logan Diomedi
+  - logan-diomedi
 eventSlug: "2026"
 featured: false
 ---
