@@ -1,4 +1,4 @@
-CSV_FILE_PATH = '/Users/lizz/Downloads/BSides Roanoke CFP 2026 (Responses) - Talk Details (1).csv'
+CSV_FILE_PATH = ''
 
 import csv
 
