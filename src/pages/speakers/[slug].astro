@@ -51,8 +51,11 @@ const groupedTalks = talks.reduce((acc, talk) => {
 // Find the most recent event slug for this speaker to provide context to the header
 const latestEventSlugForSpeaker = talks.map(t => t.eventSlug).sort().reverse()[0];
 const cleanTitle = (title: string) => title.replace(/\[([^\]]+)\]\([^)]+\)/g, '$1');
+
+const ogImageProp = typeof data.photo === 'string' ? data.photo : data.photo?.src;
+const ogDescription = `Learn about ${data.name} and their talks at BSides Roanoke.`;
 ---
-<Layout title={data.name} eventSlug={latestEventSlugForSpeaker}>
+<Layout title={data.name} eventSlug={latestEventSlugForSpeaker} description={ogDescription} image={ogImageProp}>
   <div class="container mx-auto px-4 py-16">
     <article class="max-w-3xl mx-auto">
       <header class="mb-8 text-center flex flex-col items-center">
