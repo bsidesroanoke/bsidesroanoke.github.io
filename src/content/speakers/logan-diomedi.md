@@ -1,6 +1,6 @@
 ---
 name: Logan Diomedi
-title: Introducing RelayKing - Relay Your Way to Royalty
+title: Principal Offensive Security Consultant
 company: Depth Security
 location: Roanoke, Virginia
 photo: ../../../images/speakers/logan-diomedi.jpg
