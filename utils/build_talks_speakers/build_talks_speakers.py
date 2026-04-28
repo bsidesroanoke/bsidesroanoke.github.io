@@ -11,7 +11,7 @@ with open(CSV_FILE_PATH, 'r') as file:
             talk_slug = row['Title'].replace(" ", "-").replace(":", "").lower()
             speaker_content = "---\n"
             speaker_content += f"name: {row.get('Name', '')}\n"
-            speaker_content += f"title: {row.get('Title', '')}\n"
+            speaker_content += f"title: {row.get('Job Title', '')}\n"
             speaker_content += f"company: {row.get('Company', '')}\n"
             speaker_content += f"location: {row.get('Location', '')}\n"
             speaker_content += f"photo: ../../../images/speakers/{speaker_slug}.jpg\n"
