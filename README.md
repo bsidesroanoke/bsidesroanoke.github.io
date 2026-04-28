@@ -189,6 +189,12 @@ The schedule automatically color-codes talks based on their `track` field. To ge
 
 If you use a different track name, it will still show up, but it won't have a fancy background color.
 
+### SEO & Open Graph Images (Social Media Previews)
+When links to the website are shared on platforms like Twitter, LinkedIn, or Discord, a preview card is generated. This is powered by the `astro-seo` component configured in `src/layouts/Layout.astro`.
+- **Default Image**: Most pages on the site will automatically use the `gallery_room.png` image as their preview card.
+- **Speaker Pages**: When you share a link to an individual speaker's page, the site automatically uses their `photo` (headshot) for the preview card to increase engagement! 
+- **Missing Tags**: We explicitly configure `og:title`, `og:description`, `og:url`, `og:type`, `og:image`, and `og:logo` to ensure the best possible previews and satisfy SEO scanners.
+
 ## 🛠️ How do I test & debug locally without an AI agent?
 
 **Problem**: Site not loading or building?
