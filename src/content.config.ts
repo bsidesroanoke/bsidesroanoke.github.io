@@ -76,7 +76,7 @@ const sponsors = defineCollection({
     website: z.string().url().optional(),
     years: z.array(z.string()),
     rank: z.number().optional(),
-    tiers: z.record(z.string()).optional(), // Map of year slug -> tier string
+    tiers: z.record(z.string(), z.string()).optional(), // Map of year slug -> tier string
   }),
 });
 
@@ -91,6 +91,7 @@ const cfp = defineCollection({
 });
 
 const about = defineCollection({
+  loader: glob({ pattern: ['**/*.md'], base: './src/content/about' }),
   schema: z.object({
     title: z.string(),
   }),
