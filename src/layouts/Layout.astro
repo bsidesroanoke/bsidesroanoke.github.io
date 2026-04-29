@@ -1,15 +1,21 @@
 ---
+import { SEO } from 'astro-seo';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { getCollection } from 'astro:content';
 import '../styles/global.css';
+import defaultOgImage from '../assets/gallery_room.png';
 
 export interface Props {
 	title: string;
 	eventSlug?: string; // Accept an optional event slug
+	description?: string;
+	image?: string;
 }
 
-const { title, eventSlug: pageEventSlug } = Astro.props;
+const { title, eventSlug: pageEventSlug, description = "BSides Roanoke - Security B-Sides Conference in Roanoke, VA", image } = Astro.props;
+
+const ogImage = image ? new URL(image, Astro.site).toString() : new URL(defaultOgImage.src, Astro.site).toString();
 
 // Determine latest event
 const events = await getCollection('events');
@@ -40,7 +46,32 @@ const hasRegistration = currentEvent?.data.register ? true : false;
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/png" href="/bsides_logo_square.png" />
-		<title>BSides Roanoke - {title}</title>
+		<SEO
+			title={`BSides Roanoke - ${title}`}
+			description={description}
+			openGraph={{
+				basic: {
+					title: `BSides Roanoke - ${title}`,
+					type: "website",
+					image: ogImage,
+				},
+				optional: {
+					description: description,
+				},
+				image: {
+					alt: "BSides Roanoke Preview Image",
+				}
+			}}
+			twitter={{
+				card: "summary_large_image"
+			}}
+			extend={{
+				meta: [
+					{ property: "og:url", content: Astro.url.href },
+					{ property: "og:logo", content: new URL("/bsides_logo_square.png", Astro.site).toString() }
+				]
+			}}
+		/>
 	</head>
 	<body class="bg-gray-900 text-gray-100 font-sans">
 		<Header title={title} eventSlug={eventSlugForHeader} hasTalks={hasTalksForEvent} hasScheduledTalks={hasScheduledTalks} isPastEvent={isPastEvent} latestEventSlug={latestEventSlug} hasRegistration={hasRegistration} hasCfp={hasCfp} />
