@@ -1,9 +1,12 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { getEntry } from 'astro:content';
+import { getEntry, render } from 'astro:content';
 
 const about = await getEntry('about', 'about');
-const { Content } = await about.render();
+if (!about) {
+  throw new Error('About page content not found.');
+}
+const { Content } = await render(about);
 ---
 <Layout title="About BSides Roanoke">
   <section id="about-page" class="container mx-auto px-4 py-16 md:py-24">

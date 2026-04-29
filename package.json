@@ -9,9 +9,9 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/check": "^0.9.4",
-    "@astrojs/markdoc": "^0.15.5",
-    "@astrojs/react": "^4.3.0",
+    "@astrojs/check": "^0.9.9",
+    "@astrojs/markdoc": "^1.0.4",
+    "@astrojs/react": "^5.0.4",
     "@astrojs/tailwind": "^6.0.2",
     "@nanostores/preact": "^1.0.0",
     "@tailwindcss/typography": "^0.5.16",
@@ -26,5 +26,13 @@
   },
   "devDependencies": {
     "tailwindcss": "^3.4.17"
+  },
+  "overrides": {
+    "@astrojs/tailwind": {
+      "astro": "$astro"
+    },
+    "@astrojs/markdoc": {
+      "astro": "$astro"
+    }
   }
 }
