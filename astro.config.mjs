@@ -7,7 +7,7 @@ import react from '@astrojs/react';
 
 // Define Astro configuration
 export default defineConfig({
-  site: 'https://bsides-roanoke.com',
+  site: 'https://bsidesroa.org',
   outDir: 'dist',
   srcDir: 'src',
   publicDir: 'public',
