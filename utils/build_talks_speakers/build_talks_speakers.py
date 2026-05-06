@@ -39,7 +39,7 @@ def main(csv_file, dry_run):
                 else:
                     print(f"Would create speaker file: {speaker_slug}.md")
                 talk_content = "---\n"
-                talk_content += f"title: {row.get('Title', '')}\n"
+                talk_content += f"title: \"{row.get('Title', '')}\"\n" # needs quote, just incase talk has a colon
                 talk_content += f"speakers: \n - {speaker_slug}\n"
                 talk_content += "eventSlug: \"2026\"\n"
                 talk_content += "featured: false\n"
