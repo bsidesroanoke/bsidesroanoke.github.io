@@ -20,3 +20,4 @@ pnpm-debug.log*
 
 # OS-specific
 .DS_Store
+.opencode/package-lock.json
