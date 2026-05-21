@@ -1,4 +1,10 @@
 ---
-name: "James \"Jimmy\" Ririe"
+name: James "Jimmy" Ririe
+title: Software Engineer
+company: HII
+location: Roanoke, VA
+photo: ../../../images/speakers/james-jimmy-ririe.jpg
+pronouns: ''
+website: https://keyboardslap.github.io/
 ---
-James "Jimmy" Ririe is a recent graduate from Radford University with degrees in cybersecurity and computer science. He was president of Radford's cybersecurity club and leader of its CTF team.
+Jimmy is a security researcher and amateur technomancer.
