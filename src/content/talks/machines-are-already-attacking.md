@@ -1,9 +1,13 @@
 ---
-title: "Machines Are Already Attacking. It’s Time Machines Started Defending"
-speakers:
+title: Machines Are Already Attacking - A Practical Guide to Automating Your Red Team Operations
+speakers: 
   - darren-manners
 eventSlug: "2026"
 featured: false
+startTime: "2026-06-05T11:20:00-04:00"
+endTime: "2026-06-05T12:05:00-04:00"
+room: "Auditorium"
+track: "Talk"
 ---
 Security teams are drowning in alerts while attackers are rapidly adopting automation and AI to accelerate reconnaissance, exploitation, and lateral movement. The future battlefield is no longer human vs. human — it is autonomous offense vs. autonomous defense.
 
