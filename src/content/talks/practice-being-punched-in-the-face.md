@@ -1,5 +1,5 @@
 ---
-title: Practice Being Punched In The Face - A Practical Guide to Building Resilience in Cybersecurity
+title: "Practice being punched in the face: the reality of breach readiness"
 speakers: 
   - paul-brownridge
 eventSlug: "2026"

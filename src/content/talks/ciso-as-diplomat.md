@@ -1,5 +1,5 @@
 ---
-title: CISO as Diplomat - Navigating the Boardroom with Confidence
+title: "The CISO as Diplomat: Surviving the Political Battlefield of IT"
 speakers: 
   - jonathan-kimmitt
 eventSlug: "2026"

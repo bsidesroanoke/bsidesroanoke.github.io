@@ -1,5 +1,5 @@
 ---
-title: From Chaos to Compliance - A Practical Governance System for High Risk Organizations
+title: "From Chaos to Compliance: A Practical Governance System for High-Risk Organizations"
 speakers: 
   - nakia-avery
 eventSlug: "2026"

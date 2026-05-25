@@ -1,5 +1,5 @@
 ---
-title: Ghosts In The Machine - Uncovering Hidden Threats in Modern Infrastructure
+title: "Ghosts in the Machine - A detailed look at the Therac-25 Affair"
 speakers: 
   - sean-satterlee
 eventSlug: "2026"

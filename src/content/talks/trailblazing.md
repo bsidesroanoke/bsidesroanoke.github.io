@@ -1,5 +1,5 @@
 ---
-title: Trailblazing - A Woman's Journey in Cybersecurity
+title: "Trailblazing: Lessons from the Oregon Trail for the Secure Software Supply Chain"
 speakers: 
   - kadi-mckean
 eventSlug: "2026"

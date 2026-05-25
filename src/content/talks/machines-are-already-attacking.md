@@ -1,5 +1,5 @@
 ---
-title: Machines Are Already Attacking - A Practical Guide to Automating Your Red Team Operations
+title: "Machines Are Already Attacking. It’s Time Machines Started Defending"
 speakers: 
   - darren-manners
 eventSlug: "2026"
