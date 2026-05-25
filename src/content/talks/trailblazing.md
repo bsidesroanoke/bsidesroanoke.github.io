@@ -1,9 +1,13 @@
 ---
 title: "Trailblazing: Lessons from the Oregon Trail for the Secure Software Supply Chain"
-speakers:
+speakers: 
   - kadi-mckean
 eventSlug: "2026"
 featured: false
+startTime: "2026-06-05T11:20:00-04:00"
+endTime: "2026-06-05T12:05:00-04:00"
+room: "Auditorium"
+track: "Talk"
 ---
 Dysentery, snake bites, and drowning—classic ways to die in Oregon Trail. But how do you "die" in application development? Simple: a day-zero breach or cyberattack. Just one successful breach can land your organization on the front page of the news.
 

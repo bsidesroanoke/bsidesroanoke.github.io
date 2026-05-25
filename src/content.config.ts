@@ -37,8 +37,8 @@ const talks = defineCollection({
   schema: z.object({
     title: z.string(),
     date: z.string().optional(),
-    startTime: z.string().datetime().optional(),
-    endTime: z.string().datetime().optional(),
+    startTime: z.iso.datetime({ offset: true }).optional(),
+    endTime: z.iso.datetime({ offset: true }).optional(),
     timeSlot: z.string().optional(),
     timeSlotStart: z.string().optional(),
     room: z.string().optional(),

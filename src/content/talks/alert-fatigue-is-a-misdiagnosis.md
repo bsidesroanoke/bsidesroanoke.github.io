@@ -2,7 +2,11 @@
 title: "Alert Fatigue Is a Misdiagnosis"
 speakers: 
  - kim-mahan
+startTime: "2026-06-05T15:00:00-04:00"
+endTime: "2026-06-05T15:45:00-04:00"
+room: "DefSec"
 eventSlug: "2026"
+track: "Talk"
 featured: false
 ---
 We've spent a decade treating alert fatigue as a tooling problem. Tune the SIEM. Add automation. Reduce the noise. But alert volumes keep climbing, analyst burnout and turnover continue, and we keep buying the next platform that promises to fix it. What if we've been treating the symptom and ignoring the disease?  

@@ -2,8 +2,12 @@
 title: So You Want To Be An Information Security Consultant
 speakers: 
  - greg-schaffer
+startTime: "2026-06-05T10:25:00-04:00"
+endTime: "2026-06-05T11:10:00-04:00"
+room: "DefSec"
 eventSlug: "2026"
 featured: false
+track: "Talk"
 ---
 Many experienced security professionals reach a point where independent consulting looks appealing: autonomy, flexibility, impact, and the opportunity to do meaningful work. What’s rarely discussed is how fundamentally different consulting is from being “good at security.”
 

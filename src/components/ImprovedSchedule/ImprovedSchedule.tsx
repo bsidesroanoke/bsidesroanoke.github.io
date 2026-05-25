@@ -5,11 +5,11 @@ import { marked } from 'marked';
 // Define a mapping of tracks to Tailwind CSS background colors for visual distinction.
 const TRACK_COLORS = {
   'Red Team': 'bg-red-500',
-  'Blue Team': 'bg-blue-500',
+  'Talk': 'bg-blue-500',
   'Cyber Fundamentals': 'bg-green-500',
   'Keynote': 'bg-purple-500',
   'Breakout Sessions': 'bg-blue-300',
-  'General Session': 'bg-gray-400'
+  'BSides ROA Coordination': 'bg-gray-400'
 } as const;
 
 // Helper function to extract start and end times from formatted time string

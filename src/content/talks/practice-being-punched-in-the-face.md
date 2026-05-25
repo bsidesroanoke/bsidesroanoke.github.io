@@ -1,9 +1,13 @@
 ---
 title: "Practice being punched in the face: the reality of breach readiness"
-speakers:
+speakers: 
   - paul-brownridge
 eventSlug: "2026"
 featured: false
+startTime: "2026-06-05T14:05:00-04:00"
+endTime: "2026-06-05T14:50:00-04:00"
+room: "Auditorium"
+track: "Talk"
 ---
 "*Everyone has a plan until they get punched in the face.*" Mike Tyson’s line sums up incident response better than any manual. You can draft the neatest IR plan in the world, but unless you have practised taking the hit, it will fold the moment reality lands a blow. 
   
@@ -11,4 +15,4 @@ This talk is about building muscle memory before the breach. You will walk away 
 Key takeaways: 
 - How to prepare for a cyber breach by understanding what cyber insurance covers and how to avoid invalidating it. 
 - What practical steps to take before an incident, like printing insurance documents and setting up emergency contact channels. 
-- Why practising your response plan matters, and how tabletop exercises can reveal hidden vulnerabilities and assumptions. 
+- Why practising your response plan matters, and how tabletop exercises can reveal hidden vulnerabilities and assumptions.
