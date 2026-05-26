@@ -1,5 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
+import { marked } from 'marked';
 
 // Props interface for event data
 export interface Props {
@@ -64,6 +65,7 @@ if (currentEvent && currentEvent.slug) {
   console.log('FeaturedTalks Debug - Current event slug:', currentEvent.slug);
 
   featuredTalks = talks.filter(talk => talk.data.featured && talk.data.eventSlug === currentEvent.slug);
+
   console.log('FeaturedTalks Debug - Filtered talks:', featuredTalks.map(t => ({
     id: t.id,
     eventSlug: t.data.eventSlug,
@@ -76,7 +78,7 @@ if (currentEvent && currentEvent.slug) {
 // Format slugs for dynamic routing
 function formatDate(dateString: string) {
   const options: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'long', day: 'numeric' };
-  return new Date(dateString).toLocaleDateString('en-US', options);
+  return new Date(dateString + 'T00:00:00').toLocaleDateString('en-US', options);
 }
 
 function getTimeSlot(talk: any) {
@@ -91,11 +93,22 @@ function getTimeSlot(talk: any) {
   // Fallback to legacy timeSlot field
   return talk.data.timeSlot || 'TBA';
 }
+
+function isEventDayOrBefore(dateString: string) {
+  const event = new Date(dateString);
+  const now = new Date();
+  return (now.getFullYear() < event.getFullYear()) ||
+    (now.getFullYear() === event.getFullYear() &&
+     now.getMonth() < event.getMonth()) ||
+    (now.getFullYear() === event.getFullYear() &&
+     now.getMonth() === event.getMonth() &&
+     now.getDate() <= event.getDate());
+}
 ---
 
 {featuredTalks.length > 0 && (
   <div class="container mx-auto px-4 py-4 md:py-6">
-    <h2 class="text-3xl md:text-5xl font-bold text-center mb-8">Featured Talks from {currentEvent ? formatDate(currentEvent.date) : 'Upcoming Event'}</h2>
+    <h2 class="text-3xl md:text-5xl font-bold text-center mb-8">Featured Talks {currentEvent ? (isEventDayOrBefore(currentEvent.date) ? 'for' : 'from') + ' ' + formatDate(currentEvent.date) : 'Upcoming Event'}</h2>
     <div class="bg-gray-800 rounded-3xl p-8 border border-gray-700">
       {featuredTalks.map((talk: any) => (
         <div class="mb-8 pb-8 border-b border-gray-700 last:border-b-0">
@@ -104,11 +117,18 @@ function getTimeSlot(talk: any) {
               <span class="text-sm font-semibold text-gray-400">{getTimeSlot(talk)}</span>
               <span class="text-sm font-semibold text-accent-green">{talk.data.room || talk.data.location}</span>
             </div>
-            <h3 class="text-2xl font-bold text-white mt-2 sm:mt-0">{talk.data.title}</h3>
+            <h3 class="text-2xl font-bold text-white mt-2 sm:mt-0 min-w-0 max-w-lg break-words">{talk.data.title}</h3>
           </div>
-          <p class="text-gray-300 mt-4 whitespace-pre-line">
-            <span class="font-bold">Abstract:</span> {talk.data.abstract}
-          </p>
+          <div class="text-gray-300 mt-4 whitespace-pre-line">
+            <span class="font-bold">Abstract:</span><br/>
+            {talk.body ? (
+              <span set:html={marked.parse(talk.body).trim()} />
+            ) : talk.data.abstract ? (
+              talk.data.abstract
+            ) : (
+              'No abstract available.'
+            )}
+          </div>
         </div>
       ))}
     </div>

@@ -3,7 +3,7 @@ title: "Keynote: Living With InfoSec Anemoia"
 speakers: 
  - john-heasman
 eventSlug: "2026"
-featured: false
+featured: true
 startTime: "2026-06-05T09:30:00-04:00"
 endTime: "2026-06-05T10:15:00-04:00"
 room: "Auditorium"
