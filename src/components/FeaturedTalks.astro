@@ -53,6 +53,16 @@ if (!currentEvent) {
 
 // Get talks for the current event
 let featuredTalks: any[] = [];
+
+// Build speaker slug → name map
+const allSpeakers = await getCollection('speakers');
+const speakerMap = new Map(allSpeakers.map(s => [s.id.replace(/\.md$/, ''), s.data.name]));
+
+function getSpeakerNames(talk: any): string[] {
+  if (!talk.data.speakers || !Array.isArray(talk.data.speakers)) return [];
+  return talk.data.speakers.map(slug => speakerMap.get(slug) || slug);
+}
+
 if (currentEvent && currentEvent.slug) {
   const talks = await getCollection('talks');
   console.log('FeaturedTalks Debug - All talks:', talks.map(t => ({
@@ -112,14 +122,20 @@ function isEventDayOrBefore(dateString: string) {
     <div class="bg-gray-800 rounded-3xl p-8 border border-gray-700">
       {featuredTalks.map((talk: any) => (
         <div class="mb-8 pb-8 border-b border-gray-700 last:border-b-0">
-          <div class="flex flex-col sm:flex-row sm:items-center justify-between mb-2">
-            <div class="flex items-center space-x-4">
+          <div class="flex flex-col sm:flex-row sm:items-start justify-between mb-1 gap-2 sm:gap-0">
+            <h3 class="text-2xl font-bold text-white min-w-0 max-w-lg break-words">{talk.data.title}</h3>
+            <div class="flex items-center space-x-4 shrink-0">
               <span class="text-sm font-semibold text-gray-400">{getTimeSlot(talk)}</span>
               <span class="text-sm font-semibold text-accent-green">{talk.data.room || talk.data.location}</span>
             </div>
-            <h3 class="text-2xl font-bold text-white mt-2 sm:mt-0 min-w-0 max-w-lg break-words">{talk.data.title}</h3>
           </div>
-          <div class="text-gray-300 mt-4 whitespace-pre-line">
+          {(() => {
+            const names = getSpeakerNames(talk);
+            return names.length > 0 ? (
+              <p class="text-gray-300 mt-1 mb-4">by {names.join(', ')}</p>
+            ) : null;
+          })()}
+          <div class="text-gray-300 whitespace-pre-line">
             <span class="font-bold">Abstract:</span><br/>
             {talk.body ? (
               <span set:html={marked.parse(talk.body).trim()} />
