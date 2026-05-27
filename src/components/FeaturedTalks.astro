@@ -96,8 +96,8 @@ function getTimeSlot(talk: any) {
   const start = talk.data.startTime || talk.data.timeSlotStart;
   const end = talk.data.endTime || talk.data.timeSlotEnd;
   if (start && end) {
-    const startTime = new Date(start).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-    const endTime = new Date(end).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    const startTime = new Date(start).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', timeZone: 'America/New_York' });
+    const endTime = new Date(end).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', timeZone: 'America/New_York' });
     return `${startTime} - ${endTime}`;
   }
   // Fallback to legacy timeSlot field

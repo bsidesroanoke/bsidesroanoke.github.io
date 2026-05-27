@@ -126,11 +126,11 @@ const TalkCard = ({ talk, onSelect }: { talk: Talk, onSelect: (talk: Talk) => vo
     // Convert ISO times to local time format with AM/PM
     if (time.includes('T')) {
       const date = new Date(time);
-      return date.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit', hour12: true });
+      return date.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true, timeZone: 'America/New_York' });
     }
     // Handle 24-hour format with AM/PM
     const date = new Date(`2000-01-01T${time}:00`);
-    return date.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit', hour12: true });
+    return date.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true, timeZone: 'America/New_York' });
   };
 
   // Check if both start and end times are missing
