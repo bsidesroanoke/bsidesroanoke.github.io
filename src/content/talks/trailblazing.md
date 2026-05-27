@@ -3,7 +3,7 @@ title: "Trailblazing: Lessons from the Oregon Trail for the Secure Software Supp
 speakers: 
   - kadi-mckean
 eventSlug: "2026"
-featured: false
+featured: true
 startTime: "2026-06-05T11:20:00-04:00"
 endTime: "2026-06-05T12:05:00-04:00"
 room: "Auditorium"
