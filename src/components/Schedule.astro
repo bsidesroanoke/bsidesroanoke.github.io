@@ -59,8 +59,8 @@ function getTimeSlot(talk: any) {
 // Format time slot
 function formatTimeSlot(start: string | undefined, end: string | undefined) {
   if (!start || !end) return '';
-  const startTime = new Date(start).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-  const endTime = new Date(end).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+  const startTime = new Date(start).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', timeZone: 'America/New_York' });
+  const endTime = new Date(end).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', timeZone: 'America/New_York' });
   return `${startTime} - ${endTime}`;
 }
 ---

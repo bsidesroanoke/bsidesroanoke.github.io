@@ -21,19 +21,16 @@ const pronounsMap = new Map(speakers.map(s => [s.id.replace(/\.md$/, ''), s.data
 const talks = (await getCollection('talks')).filter(talk => talk.data.eventSlug === year);
 const hasScheduledTalks = talks.some(talk => talk.data.startTime);
 const sortedTalks = talks.sort((a, b) => {
-  const dateA = a.data.date ? new Date(a.data.date) : null;
-  const dateB = b.data.date ? new Date(b.data.date) : null;
-
-  if (dateA && dateB) {
-    return dateB.getTime() - dateA.getTime();
+  const startA = a.data.startTime || a.data.timeSlotStart;
+  const startB = b.data.startTime || b.data.timeSlotStart;
+  
+  if (startA && startB) {
+    return new Date(startA).getTime() - new Date(startB).getTime();
   }
-  if (dateA) {
-    return -1;
-  }
-  if (dateB) {
-    return 1;
-  }
-  return 0;
+  if (startA) return -1;
+  if (startB) return 1;
+  
+  return (a.data.title || '').localeCompare(b.data.title || '');
 });
 
 ---
@@ -58,7 +55,7 @@ const sortedTalks = talks.sort((a, b) => {
           <div class="flex items-center space-x-4 text-sm font-semibold mb-4">
             <span class="text-gray-400">
               {data.startTime && data.endTime
-                ? `${new Date(data.startTime).toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' })} - ${new Date(data.endTime).toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' })}`
+                ? `${new Date(data.startTime).toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', timeZone: 'America/New_York' })} - ${new Date(data.endTime).toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', timeZone: 'America/New_York' })}`
                 : 'TBD'}
             </span>
             <span class="text-accent-green">{data.room}</span>
