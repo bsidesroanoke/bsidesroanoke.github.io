@@ -4,10 +4,10 @@ speakers:
   - darren-manners
 eventSlug: "2026"
 featured: false
-startTime: "2026-06-05T11:20:00-04:00"
-endTime: "2026-06-05T12:05:00-04:00"
-room: "Auditorium"
+startTime: "2026-06-05T15:55:00-04:00"
+endTime: "2026-06-05T16:40:00-04:00"
 track: "Talk"
+room: "DefSec"
 ---
 Security teams are drowning in alerts while attackers are rapidly adopting automation and AI to accelerate reconnaissance, exploitation, and lateral movement. The future battlefield is no longer human vs. human — it is autonomous offense vs. autonomous defense.
 

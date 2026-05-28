@@ -6,7 +6,7 @@ eventSlug: "2026"
 featured: false
 startTime: "2026-06-05T14:05:00-04:00"
 endTime: "2026-06-05T14:50:00-04:00"
-room: "Auditorium"
+room: "DefSec"
 track: "Talk"
 ---
 "*Everyone has a plan until they get punched in the face.*" Mike Tyson’s line sums up incident response better than any manual. You can draft the neatest IR plan in the world, but unless you have practised taking the hit, it will fold the moment reality lands a blow. 
