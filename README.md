@@ -82,8 +82,8 @@ In today's digital landscape, web security is more critical than ever. Let's exp
 | Field | Type | Required | Description |
 |-------|------|----------|-------------|
 | `title` | string | Yes | Name of the event |
-| `date` | string | Yes | Date of the event (YYYY-MM-DD) |
-| `location` | string | Yes | Physical location |
+| `date` | string | Yes | Date of the event (`YYYY-MM-DD` for full dates, or `YYYY` for stubs) |
+| `location` | string | Yes | Physical location (can be empty string `""` for stubs) |
 | `featured` | boolean | No | Whether to feature this event |
 | `venue_parking` | string | No | Parking information |
 | `register` | string | No | Registration link |
@@ -173,9 +173,16 @@ If you're new to this and just want to get the site running on your machine:
 ## 🧠 Good to Know
 
 ### Navigation Buttons
-You might notice that the **Speakers** and **Schedule** buttons don't always appear in the top navigation bar. This is intentional!
-- These buttons **only appear** if there are talks added for that specific event.
-- If you're setting up a new year (e.g., 2026) and haven't added talks yet, don't panic, the buttons will show up automatically once you add your first talk.
+You might notice that the **Speakers**, **Schedule**, and **Venue/Parking** buttons don't always appear in the top navigation bar. This is intentional!
+- **Speakers & Schedule**: Only appear if there are talks added for that specific event.
+- **Venue/Parking**: Only appears if venue/parking details are provided for that event.
+- If you're setting up a new year (e.g., 2027) and haven't added talks or venue details yet, the buttons will show up automatically once you add them.
+
+### Event Stubs & Year-Only Dates
+When announcing a future event without full details finalized:
+- Set `date: "YYYY"` (e.g., `date: "2027"`).
+- The home page will keep the banner photo while omitting the date/location badge box and empty schedule/sponsor placeholders, keeping the focus cleanly on your announcement text.
+- Once details are confirmed, updating `date` to `YYYY-MM-DD` and filling in location/registration will automatically restore the full hero badges.
 
 ### Track Color Coding
 The schedule automatically color-codes talks based on their `track` field. To get these pretty colors, make sure you use one of these exact track names in your talk files:
