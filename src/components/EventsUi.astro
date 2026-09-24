@@ -100,8 +100,8 @@ const activeTiers = Object.keys(groupedSponsors)
   </div>
 </section>
 
+<!-- Speakers Section -->
 {hasFeaturedSpeakers && (
-  <!-- Speakers Section -->
   <section id="speakers" class="py-4 md:py-6 bg-gray-900">
     <div class="container mx-auto px-4">
       <FeaturedSpeakers event={event} />
@@ -109,8 +109,8 @@ const activeTiers = Object.keys(groupedSponsors)
   </section>
 )}
 
+<!-- Featured Talks Section -->
 {hasTalksForEvent && (
-  <!-- Featured Talks Section -->
   <section id="featured-talks" class="py-4 md:py-6 bg-gray-900">
      <div class="container mx-auto px-4">
        <FeaturedTalks event={event} />
@@ -118,15 +118,14 @@ const activeTiers = Object.keys(groupedSponsors)
   </section>
 )}
 
+<!-- Schedule / CFP Section -->
 {hasScheduledTalks ? (
-  <!-- Schedule Section -->
   <section id="schedule" class="py-4 md:py-6">
     <div class="container mx-auto px-4">
       <Schedule event={event} />
     </div>
   </section>
 ) : (
-  <!-- CFP Section -->
   <section id="cfp" class="py-16 md:py-24 text-center">
     <div class="container mx-auto px-4">
       <h2 class="text-3xl md:text-5xl font-bold mb-4">The Schedule is Being Finalized!</h2>
