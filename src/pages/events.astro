@@ -11,6 +11,14 @@ const pastEvents = sortedEvents.slice(1); // Hide the latest event (current)
 function formatSlug(id: string) {
   return id.replace('events/', '').replace('.md', '');
 }
+
+function formatDate(dateStr: string) {
+  if (!dateStr) return '';
+  if (/^\d{4}$/.test(dateStr.trim())) {
+    return dateStr;
+  }
+  return new Date(dateStr).toLocaleDateString('en-US', { timeZone: 'UTC' });
+}
 ---
 
 <Layout title="Events">
@@ -21,8 +29,8 @@ function formatSlug(id: string) {
     {pastEvents.map((event: any) => (
       <div class="bg-gray-800 rounded-3xl p-6 border border-gray-700 hover:border-accent-blue transition-colors">
         <h2 class="text-3xl font-bold mb-2">{event.data.title}</h2>
-        <p class="text-gray-400 mb-1"><strong>Date:</strong> {new Date(event.data.date).toLocaleDateString()}</p>
-        <p class="text-gray-400 mb-1"><strong>Location:</strong> {event.data.location}</p>
+        <p class="text-gray-400 mb-1"><strong>Date:</strong> {formatDate(event.data.date)}</p>
+        {event.data.location && <p class="text-gray-400 mb-1"><strong>Location:</strong> {event.data.location}</p>}
         <p class="text-gray-300">{event.data.description || 'An annual regional cybersecurity conference.'}</p>
         <a href={`/events/${formatSlug(event.id)}`} class="mt-4 inline-block px-6 py-3 bg-accent-blue text-gray-900 rounded-full font-bold hover:bg-opacity-80 transition-colors glow-shadow">
           View Event

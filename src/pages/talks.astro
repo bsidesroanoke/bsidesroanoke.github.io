@@ -1,13 +1,20 @@
 ---
 import { getCollection } from 'astro:content';
 
-// Get all events and find the latest one by date.
+// Get all events and talks to find the latest event with talks.
 const events = await getCollection('events');
-const latestEvent = events.sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime())[0];
+const talks = await getCollection('talks');
 
-// If a latest event is found, redirect to its talks page.
+const eventsWithTalks = events.filter(event => {
+  const slug = event.id.replace('.md', '');
+  return talks.some(t => t.data.eventSlug === slug);
+});
+
+const latestEvent = eventsWithTalks.sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime())[0];
+
+// If a latest event with talks is found, redirect to its talks page.
 if (latestEvent) {
-  return Astro.redirect(`/talks/${latestEvent.slug}`);
+  return Astro.redirect(`/talks/${latestEvent.id.replace('.md', '')}`);
 }
 
 // If no events are found, return a 404 response.

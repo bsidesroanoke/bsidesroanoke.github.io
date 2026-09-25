@@ -35,9 +35,10 @@ const hasScheduledTalks = allTalks.some(talk => talk.data.eventSlug === eventSlu
 const allCfps = await getCollection('cfp');
 const hasCfp = allCfps.some(cfp => cfp.id.replace('.md', '') === eventSlugForHeader);
 
-// Check if there's a registration link
+// Check if there's a registration link and venue info
 const currentEvent = events.find(e => e.id.replace('.md', '') === eventSlugForHeader);
 const hasRegistration = currentEvent?.data.register ? true : false;
+const hasVenue = Boolean(currentEvent?.data.venue_parking);
 ---
 
 <!doctype html>
@@ -74,7 +75,7 @@ const hasRegistration = currentEvent?.data.register ? true : false;
 		/>
 	</head>
 	<body class="bg-gray-900 text-gray-100 font-sans">
-		<Header title={title} eventSlug={eventSlugForHeader} hasTalks={hasTalksForEvent} hasScheduledTalks={hasScheduledTalks} isPastEvent={isPastEvent} latestEventSlug={latestEventSlug} hasRegistration={hasRegistration} hasCfp={hasCfp} />
+		<Header title={title} eventSlug={eventSlugForHeader} hasTalks={hasTalksForEvent} hasScheduledTalks={hasScheduledTalks} isPastEvent={isPastEvent} latestEventSlug={latestEventSlug} hasRegistration={hasRegistration} hasCfp={hasCfp} hasVenue={hasVenue} />
 		<slot />
 		<Footer />
 	</body>

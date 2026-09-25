@@ -1,5 +1,5 @@
 ---
-const { title, eventSlug, hasTalks, hasScheduledTalks, isPastEvent, latestEventSlug, hasRegistration, hasCfp } = Astro.props;
+const { title, eventSlug, hasTalks, hasScheduledTalks, isPastEvent, latestEventSlug, hasRegistration, hasCfp, hasVenue = true } = Astro.props;
 import { Image } from 'astro:assets';
 
 import logo from '../assets/b-sides-roanoke.svg';
@@ -27,7 +27,7 @@ import logo from '../assets/b-sides-roanoke.svg';
     <nav class="hidden md:flex items-center space-x-6">
       <a href="/about" class="text-gray-300 hover:text-accent-blue transition-colors">About</a>
       <a href="/conduct" class="text-gray-300 hover:text-accent-blue transition-colors">Code of Conduct</a>
-      <a href={`/venue/${eventSlug}`} class="text-gray-300 hover:text-accent-blue transition-colors">Venue/Parking</a>
+      {hasVenue && <a href={`/venue/${eventSlug}`} class="text-gray-300 hover:text-accent-blue transition-colors">Venue/Parking</a>}
       {hasTalks ? (
         <>
           <a href={`/speakers/${eventSlug}`} class="text-gray-300 hover:text-accent-blue transition-colors">Speakers</a>
@@ -64,7 +64,7 @@ import logo from '../assets/b-sides-roanoke.svg';
          flex flex-col items-center justify-start overflow-y-auto pt-32 pb-10 space-y-8 h-screen">
     <a href="/about" class="text-2xl text-gray-200 hover:text-accent-blue transition-colors">About</a>
     <a href="/conduct" class="text-2xl text-gray-200 hover:text-accent-blue transition-colors">Code of Conduct</a>
-    <a href={`/venue/${eventSlug}`} class="text-2xl text-gray-200 hover:text-accent-blue transition-colors">Venue/Parking</a>
+    {hasVenue && <a href={`/venue/${eventSlug}`} class="text-2xl text-gray-200 hover:text-accent-blue transition-colors">Venue/Parking</a>}
     {hasTalks ? (
       <>
         <a href={`/speakers/${eventSlug}`} class="text-2xl text-gray-200 hover:text-accent-blue transition-colors">Speakers</a>
